@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+
+{% block title %}
+	<title>Settings - The Impossible</title>
+{% endblock %}
+
+{% block content %} 
+	<div class="wrapper">
+		<link rel="stylesheet" type="text/css" href="{% static 'usermgmt/account_setting_page/main.css' %}"> 
+
+		<script type="text/javascript" src="{% static 'usermgmt/account_setting_page/resize.js' %}"></script>
+
+		<div class='row align-items-center h-100'>
+			<div class="center">
+				<div class="close-window-wrapper">
+					<button class="btn close-window" onclick="window.location.href='{% url 'account_dashboard_page' username=user.username content_filter='my' page_num=1 %}'">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+					</button>
+				</div>
+
+				<div class="table-wrapper">
+					<table>
+						<tr>
+							<td id="menu">
+								<h5><a href="{% url 'account_setting_profile_page' %}">Edit Profile</a></h5>
+								<h5><a href="{% url 'account_setting_password_page' %}">Change Password</a></h5>
+								<h5><a href="{% url 'account_setting_explore_content_page' %}">Explore Contents</a></h5>
+								<h5><a href="{% url 'account_setting_notification_page' %}">Notifications</a></h5>
+								<h5><a href="{% url 'account_setting_privacy_page' %}">Privacy</a></h5>
+								<h5><a href="{% url 'account_setting_newsletter_page' %}">Newsletter</a></h5>
+							</td>
+							<td class="form-wrapper">
+								{% include form_template_page %}
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="minify-menu">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

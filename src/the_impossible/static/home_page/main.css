@@ -1,0 +1,105 @@
+body {
+	background-color: #fff;
+}
+
+nav, footer {
+	display: none !important;
+}
+
+.main-container {
+	margin: 0;
+}
+
+.wrapper {
+	position: relative;
+	overflow: hidden;
+	height: 100vh;
+	min-height: 400px;
+}
+
+.circles {
+	width: 300px;
+	position: absolute;
+	margin-top: 20px;
+	margin-left: -80px;
+	z-index: -1;
+	opacity: 0.4;
+}
+
+.kite {
+	width: 300px;
+	position: absolute;	
+	margin-left: 400px;
+	margin-top: 30px;
+	z-index: -1;
+}
+
+.row {
+	overflow: scroll;
+}
+
+.center {
+	width: max-content;
+	max-width: 400px;
+	margin: auto;
+}
+
+.logo {
+	width: 100px;
+	margin-bottom: 30px;
+}
+
+a {
+	border-bottom-width: 5px;
+	border-style: solid;
+	border-color: #ddd;
+	color: #aaa;
+}
+
+a:hover {
+	border-color: #ccc;
+	color: #999;
+	text-decoration: none;
+}
+
+p {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.login, .signup {
+	display: block;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddd;
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 50px;
+	background-color: #fff;
+}
+
+.login:hover {
+	background-color: #eee;
+}
+
+.signup {
+	background-color: #000;
+	color: #fff;
+}
+
+.signup:hover {
+	background-color: #333;
+	color: #eee;
+}
+
+@media only screen and (max-width: 1000px) {
+	.kite {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.circles {
+		display: none;
+	}
+}

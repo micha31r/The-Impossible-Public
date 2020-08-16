@@ -1,0 +1,69 @@
+{% load static %}
+{% load tags %}
+
+<!-- Masonary css -->
+<link rel="stylesheet" type="text/css" href="{% static 'idea/masonary_idea/main.css' %}">
+
+<script type="text/javascript" src="{% static 'idea/masonary_idea/show_button.js' %}"></script>
+
+<!-- Masonry container resize function -->
+<script type="text/javascript" src="{% static 'idea/masonary_idea/resize.js' %}"></script>
+
+<!-- Display Ideas -->
+<!-- https://tobiasahlin.com/blog/masonry-with-css/ -->
+<div class="flex-container">
+	{% for idea in masonary_ideas %}
+		<div class="flex-wrapper">
+			<div class="card" id="card-{{ idea.pk }}">
+
+				<!-- Header image -->
+				{% if idea.header_img.file %}
+					<div class="card-img-wrapper">
+						<img src="{{ idea.header_img.file.url }}" alt="{{ idea.header_img.description }}">
+					</div>
+
+					<!-- Circle like button -->
+					{% include 'idea/card_action.html' %}
+				{% endif %}
+
+				<div class="card-body">
+					<!-- Show like button here if there is no header image -->
+					{% if idea.header_img.file == None %}
+						<!-- Like button and view count -->
+						{% include 'idea/mini_card_action.html' %}
+					{% endif %}	
+
+					<!-- Title -->
+					<h5 class="card-title"><a href="{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+
+					<!-- Short description -->
+					<h6 class="card-subtitle mb-2">{{ idea.short_description|truncatechars:50 }}</h6>
+
+					<!-- Content -->
+					<p class="card-text">{{ idea.full_description|truncatechars:100 }}</p>
+
+					<!-- Author -->
+					<p class="author">By {{ idea.author }}</p>
+
+					<!-- Views -->
+					<p class="views">Views {{ idea.viewed_user.count|ntt }}</p>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	<span class="flex-wrapper break"></span>
+	<span class="flex-wrapper break"></span>
+	<span class="flex-wrapper break"></span>
+	<span class="flex-wrapper break"></span>
+	<!-- Show message is no post -->
+	{% if masonary_ideas|length == 0 %}
+		<table class="no-content-text">
+		    <tr>
+		    	<td class="align-middle">
+					<h1><span>No</span>thing t<span>o</span> sh<span>o</span>w</h1>
+					<a href="{% url 'idea_create_view' %}">Click to add ur idea</a>
+				</td>
+			</tr>
+		</table>
+	{% endif %}
+</div>	

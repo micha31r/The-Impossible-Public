@@ -1,0 +1,160 @@
+nav, footer {
+	display: none !important;
+}
+
+.wrapper {
+	padding: 0;
+	height: 100vh;
+}
+
+.row {
+	overflow: scroll;
+}
+
+.center {
+	width: max-content;
+	max-width: 100%;
+	min-height: 400px;
+	height: max-content;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.close-window-wrapper {
+	width: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-bottom: 40px;
+	text-align: right;
+}
+
+.close-window-wrapper button {
+	padding: 0;
+}
+
+.close-window svg {
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	filter: var(--invert-filter);
+}
+
+.close-window svg:hover {
+	padding: 8px;
+	border-style: solid;
+	border-radius: 100%;
+	border-width: 2px;
+	border-color: var(--color-third);
+}
+
+@media only screen and (max-width: 700px) {
+	.row {
+		max-width: 100% !important;
+		margin: auto !important;
+		height: max-content !important;
+	}
+	.center {
+		width: 90%;
+	}
+}
+
+.header {
+	font-size: 3rem;
+	color: var(--color-third);
+	margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+	.header {
+		font-size: 2.5rem;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.header {
+		font-size: 2.2rem;
+	}
+}
+
+.feed-container {
+	max-height: 100vh;
+	overflow: scroll;
+	border-top-width: 6px;
+	border-bottom-width: 6px;
+	border-style: solid;
+	border-color: var(--color-six);
+}
+
+.feed-card {
+	width: 500px;
+	max-width: 100%;
+	border-style: solid;
+	border-radius: 15px;
+	border-color: var(--color-ten);
+	border-width: 1px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: var(--color-first);
+}
+
+.content-type {
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: var(--color-four) !important;
+	margin: 0;
+}
+
+.text-wrapper {
+	padding: 15px;
+	border-style: solid;
+	border-color: var(--color-ten);
+	border-top-width: 1px;
+	word-break: break-all;
+	color: var(--color-six);
+}
+
+.feed-card h6 {
+	color: var(--color-six);
+}
+
+.feed-card h4 {
+	color: var(--color-six);
+}
+
+.feed-card p {
+	margin: 0;
+	color: var(--color-six);
+}
+
+.feed-card ul {
+	color: var(--color-five);
+	/* Default ul style */
+	display: block; 
+	list-style-type: disc; 
+	margin-top: 1em; 
+	margin-bottom: 1em; 
+	margin-left: 0; 
+	margin-right: 0; 
+	padding-left: 40px;
+}
+
+.feed-card a {
+	color: var(--color-brand);
+}
+
+.feed-card img {
+	width: 100%;
+	filter: grayscale(100%);
+}
+
+.author, .timestamp {
+	font-size: 0.8rem;
+	color: var(--color-four) !important;
+}
+
+.no-feed {
+	color: var(--color-six);
+}
+

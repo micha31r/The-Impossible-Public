@@ -1,0 +1,43 @@
+{% load static %}
+
+<!-- Blur the all elements behind the subscription form -->
+<div class="subscribe-blur"></div>
+
+<div class="close-window-wrapper">
+	<button class="btn close-window" id="hide-subscribe-form" onclick="newsletter_fade();">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+	</button>
+</div>
+				
+<div class="subscribe-wrapper">
+	<link rel="stylesheet" type="text/css" href="{% static 'newsletter/main.css' %}">
+
+	<script type="text/javascript" src="{% static 'newsletter/resize.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'newsletter/ajax.js' %}"></script>
+
+	<div class="vertical-split-card">
+		<img alt="astronaut" class="vertical-card-img" src="{% static 'newsletter/astronaut.png' %}">
+
+		<div class="vertical-card-body">
+			<h1>Don't want to missout?</h1>
+			<h4>More content? Yes please!</h4>
+			<br>
+			<p>Join our weekly mailing list for new and innovative ideas<br>Unsubscribe at any time!</p>
+			<br>
+
+			<!-- status -->
+			<p id="join-status" style="display:none;"></p>
+
+			<div id="join-form">
+				<input type="email" id="email" placeholder="Email address">
+				<button class="btn btn-light join-newsletter-submit" onclick="join_newsletter_ajax($('#email').val());"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{% static 'newsletter/fade_form.js' %}"></script>
+
+
+

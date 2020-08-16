@@ -1,0 +1,109 @@
+nav, footer {
+	display: none !important;
+}
+
+.wrapper {
+	padding: 0;
+	height: 100vh;
+}
+
+.row {
+	overflow: scroll;
+}
+
+.center {
+	width: max-content;
+	max-width: 100%;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.close-window-wrapper {
+	width: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-bottom: 40px;
+	text-align: right;
+}
+
+.close-window-wrapper button {
+	padding: 0;
+}
+
+.close-window svg {
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	filter: var(--invert-filter);
+}
+
+.close-window svg:hover {
+	padding: 8px;
+	border-style: solid;
+	border-radius: 100%;
+	border-width: 2px;
+	border-color: var(--color-third);
+}
+
+.header {
+	font-size: 3.2rem;
+}
+
+@media only screen and (max-width: 400px) {
+	.header {
+		font-size: 2rem;
+	}
+}
+
+.header a {
+	color: var(--color-six);
+}
+
+.back-link {
+	font-size: 1rem;
+	text-decoration: underline;
+}
+
+.center input {
+	width: 600px;
+	/* Minus an extra 5px just in case */
+	max-width: calc(100% - (24px + 4px + 20px) - 5px);
+	border-radius: 100px;
+	border-style: solid;
+	border-color: var(--color-ten);
+	border-width: 1px;
+	padding: 10px;
+	color: var(--color-six);
+	background-color: var(--color-twelve);
+}
+
+.center form button {
+	vertical-align: top;
+	width: max-content;
+	/* 4px is border (T & B) */
+	/* 24px is svg height */
+	/* 20px is padding (T & B) */
+	height: calc(24px + 4px + 20px);
+	padding: 10px;
+	border-radius: 100%;
+}
+
+.search-result {
+	margin-top: 40px;
+}
+
+.search-result > p {
+	text-align: center;
+	color: var(--color-six);
+}
+
+@media only screen and (max-width: 700px) {
+	.row {
+		max-width: 100% !important;
+		margin: auto !important;
+	}
+	.center {
+		width: 90%;
+	}
+}

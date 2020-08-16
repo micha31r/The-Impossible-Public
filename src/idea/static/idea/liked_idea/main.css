@@ -1,0 +1,27 @@
+.liked-idea-container {
+	margin: auto;
+	width: 60%;
+	max-width: 1200px;
+	min-width: 700px;
+	padding: 20px;
+	padding-bottom: 0;
+	border-radius: 20px;
+	border-width: 2px;
+	border-color: rgba(0,0,0,0.1);
+	border-style: dashed;
+}
+
+.card-mini {
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 20px;
+	background-color: rgb(254,204,76);
+	color: #000;
+}
+
+@media only screen and (max-width: 830px) {
+	.liked-idea-container {
+		width: 100%;
+		min-width: 0px;
+	}
+}

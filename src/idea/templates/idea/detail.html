@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+
+{% block title %}
+	<title>{{ idea.name }} - The Impossible</title>
+{% endblock %}
+
+{% block content %}
+	<!-- Main css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'idea/detail_page/main.css' %}">
+
+	<!-- Resize JS -->
+	<script type="text/javascript" src="{% static 'idea/detail_page/resize.js' %}"></script>
+
+	<!-- Ajax JS -->
+	<script type="text/javascript" src="{% static 'idea/detail_page/ajax.js' %}"></script>
+
+	<div class="wrapper">
+		<div class="left-container">
+			<!-- Content -->
+			<div class="idea-content">
+				<h2>{{ idea.name }}</h2>
+				<h5>{{ idea.short_description }}</h5>
+				<p>{{ idea.full_description }}</p>
+				<div id="append-target1"></div>
+				{% if idea.tags %}
+					<div class="idea-tag-container">
+						{% for tag in idea.tags.all %}
+							<div class="idea-tag {% if tag in profile.tags.all %} idea-tag-yellow {% endif %}">
+								<p>{{ tag }}</p>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if user == idea.author.user %}
+					<button class="btn btn-yellow-outline bold edit-btn" onclick="window.location.href='{% url 'idea_edit_page' pk=idea.id %}'">Edit Idea</button>
+				{% endif %}
+			</div>
+
+			<!-- Author profile -->
+			<div class="author-profile-wrapper">
+				<table>
+					<tr>
+						<td>
+							<div class="author-profile-img-wrapper">
+								<a href="{% url 'account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{% if idea.author.profile_img %}<img alt="profile image" class="author-profile-img" src="{{ idea.author.profile_img.file.url }}">{% endif %}</a>
+							</div>
+						</td>
+						<td>
+							<div class="info">
+								<p>Written By</p>
+								<h5>
+									<a href="{% url 'account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{{ idea.author }}</a><!-- Follow button -->
+									<a class="follow-btn" href="{% if user.is_authenticated %}{% url 'account_follow_view' username=idea.author.user.username %}{% else %}{% url 'login_page' %}{% endif %}">{% if idea.author.user in profile.following.all %}Unfollow{% else %}Follow{% endif%}</a>
+								</h5>
+								<h6>{% if idea.author.bio %}{{ idea.author.bio|truncatechars:60 }}{% else %}(No Bio..){% endif %}</h6>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<h1 class="comment-header"><b>Comments</b></h1>
+
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+
+				<!-- Show errors -->
+				{% if error %}
+					<div class="alert alert-black bold" role="alert">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+		                {{ error|escape }}
+		            </div>
+				{% endif %}
+
+				{% include 'form_error.html' %}
+
+				{{ form.full_description }}
+					
+				<button class="btn btn-dark btn-black bold submit" type="submit">Post Comment</button>
+			</form>
+
+			<div class="comment-container">
+				<span id="append-target2">
+					{% for comment in comments %}
+						<div class="comment-wrapper">
+							<h6>{{ comment.full_description }}</h6>
+							<p class="small">{{ comment.author }}</p>
+							<a class="small {% if comment.author.user == user %} delete-link {% endif %}" {% if comment.author.user == user %} href="{% url 'idea_comment_delete_view' comment_pk=comment.pk idea_pk=idea.pk %}" {% endif %}><span>Last Edited <span class="time">{{ comment.last_edit }}</span></span></a>
+						</div>
+					{% endfor %}
+				<span>
+				{% if not idea.comments.all %}
+					<p class="no-comment-text">No comments</p>
+				{% endif %}
+			</div>
+			<script type="text/javascript">
+				var username = "{{ user.get_full_name }}";
+				var comment_num = parseInt("{{ comments|length }}");
+				var total_comments_num = parseInt("{{ total_comments_num }}");
+				var idea_pk = "{{ idea.pk }}";
+			</script>
+			<button class="btn bold more-comment-btn" onclick="comment_ajax('{{ idea.pk }}');return false;">...</button>
+		</div>
+		<div class="right-container">
+			<div class="file-wrapper {% if not idea.header_img %}no-header-image{% endif %}">
+				{% if idea.header_img %}
+					<img alt="header image" src="{{ idea.header_img.file.url }}">
+				{% else %}
+					<h1 class="no-content-text"><span>No Image</span></h1>
+				{% endif %}
+			</div>
+			{% for image in idea.body_img.all %}
+				<div class="file-wrapper">
+					<img alt="body image" src="{{ image.file.url }}">
+				</div>
+			{% endfor %}
+		</div>
+		<!-- Timestamp -->
+		<div class="timestamp">
+			<p>Created at <span class="time">{{ idea.timestamp }}</span></p>
+			<p>Last Edited <span class="time">{{ idea.last_edit }}</span></p>
+		</div>
+	</div>
+{% endblock %}

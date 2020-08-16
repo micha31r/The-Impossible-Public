@@ -1,0 +1,52 @@
+.view-count, .like-count {
+	height: 1.2rem;
+	font-size: 1.1rem;
+	line-height: 1.1rem;
+	color: rgb(90,92,154);
+	font-family: 'Varela Round', sans-serif;
+}
+
+.view-svg, .like-svg {
+	display: inline !important;
+	height: 1.2rem;
+	margin-right: 5px;
+	vertical-align: text-top;
+}
+
+.like-button, .bookmark-button {
+	border: none !important;
+	background-color: var(--color-first) !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.card-button-wrapper {
+	margin: 0px;
+	margin-top: -20px;
+	padding: 15px;
+	border-bottom-left-radius: 10px;
+	background-color: var(--color-first);
+	position: absolute;
+	right: 0;
+	display: none;
+	opacity: 0;
+	animation-duration: 0.3s;
+	animation-fill-mode: forwards;
+}
+
+.like-button:focus, .bookmark-button:focus {
+	outline: none;
+}
+
+*[name="liked"] {
+	fill: rgb(252,52,104);
+}
+
+*[name="starred"] {
+	fill: rgb(240,165,0);
+}
+
+.text-seperator {
+	margin-left: 10px;
+	margin-right: 10px;
+}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	<title>Upload - The Impossible</title>
+{% endblock %}
+
+{% block content %}
+	<!-- Mobile js -->
+	<script type="text/javascript" src="{% static 'component/base/mobile.js' %}"></script>
+
+	<!-- Blur js -->
+	<script type="text/javascript" src="{% static 'userupload/file_page/blur.js' %}"></script>
+
+	<!-- Resize js -->
+	<script type="text/javascript" src="{% static 'userupload/file_page/resize.js' %}"></script>
+
+	<!-- Main css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'userupload/file_page/main.css' %}">
+
+	<div class="wrapper">
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-wrapper">
+				<!-- Show errors -->
+				{% if error %}
+					<div class="alert alert-black bold" role="alert">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+		                {{ error|escape }}
+		            </div>
+				{% endif %}
+
+				{% include 'form_error.html' %}
+
+				{{ form.description }}
+				<!-- The real file input is hidden -->
+				<p hidden>{{ form.file }}</p>
+
+				<!-- This button replaces the default input -->
+				<div id="file-wrapper" style="background-image:url('{{ file.file.url }}');">
+					<div id="blur"></div>
+					<img alt="" id="hidden" src="{{ file.file.url }}">
+					<table>
+						<tr>
+							<td class="align-middle">
+								<button class="btn btn-light" id="file-button" onclick="$('#id_file').click(); return false;">Choose File</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<button class="btn btn-yellow bold submit" type="submit" onclick="show_spinner();">Save Image</button>
+
+				<div class="spinner-border text-secondary" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+
+				{% block delete_img %}
+				{% endblock %}
+			</div>
+		</form>
+
+		<!-- Timestamp -->
+		<div class="timestamp">
+			{% if file.timestamp and file.last_edit %}
+				<p>Created at <span class="time">{{ file.timestamp }}</span></p>
+				<p>Last Edited <span class="time">{{ file.last_edit }}</span></p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

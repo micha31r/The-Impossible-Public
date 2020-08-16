@@ -1,0 +1,7 @@
+{% extends 'userupload/img.html' %}
+
+{% block delete_img %}
+	{% if file %}
+		<button class="btn btn-black-outline delete-btn" onclick="window.location.href='{% url 'userupload_idea_img_delete_page' redirect_name=redirect_name obj_pk=obj.pk file_pk=file.pk %}';return false;">Delete</button>
+	{% endif %}
+{% endblock %}

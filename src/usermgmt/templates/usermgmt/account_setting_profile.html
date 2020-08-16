@@ -1,0 +1,78 @@
+{% load static %}
+{% load tags %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'usermgmt/account_setting_profile_page/main.css' %}">
+
+<script type="text/javascript" src="{% static 'usermgmt/account_setting_profile_page/resize.js' %}"></script>
+
+<form class="profile-form" method="post">
+	{% csrf_token %}
+
+	<!-- Show error -->
+	{% if error %}
+		<div class="alert alert-black" role="alert">
+	  		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+	  		{{ error|escape }}
+		</div>
+	{% endif %}
+
+	{% include 'form_error.html' %}
+
+	<table>
+		<tr id="append-target1"></tr>
+		<tr id="append-origin1">
+			<td class="td-label">
+				<p>{{ form.first_name.label }}:</p>
+			</td>
+			<td>
+				{{ form.first_name }}
+			</td>
+		</tr>
+		<tr id="append-target2"></tr>
+		<tr id="append-origin2">
+			<td class="td-label">
+				<p>{{ form.last_name.label }}:</p>
+			</td>
+			<td>
+				{{ form.last_name }}
+			</td>
+		</tr>
+		<tr id="append-target3"></tr>
+		<tr id="append-origin3">
+			<td class="td-label">
+				<p>{{ form.email.label }}:</p>
+			</td>
+			<td>
+				{{ form.email }}
+			</td>
+		</tr>
+		<tr id="append-target4"></tr>
+		<tr id="append-origin4">
+			<td class="td-label">
+				<p>{{ form.bio.label }}:</p>
+			</td>
+			<td>
+				{{ form.bio }}
+			</td>
+		</tr>
+		<tr id="append-target5"></tr>
+		<tr id="append-origin5">
+			<td class="td-label">
+				<p>{{ form.website.label }}:</p>
+			</td>
+			<td>
+				{{ form.website }}
+			</td>
+		</tr>
+		<tr id="append-target6"></tr>
+		<tr id="append-origin6">
+			<td class="td-label">
+				<p>{{ form.location.label }}:</p>
+			</td>
+			<td>
+				{{ form.location }}
+			</td>
+		</tr>
+	</table>
+	<button class="btn btn-yellow bold" type="submit">Update Profile</button>
+</form>

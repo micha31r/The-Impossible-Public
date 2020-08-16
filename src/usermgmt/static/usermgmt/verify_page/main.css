@@ -1,0 +1,60 @@
+body {
+	background-color: #fff;
+}
+
+.wrapper {
+	padding: 0;
+	height: 100vh;
+	min-height: 400px;
+}
+
+.row {
+	width: 100%;
+	padding: 40px;
+	/*overflow: scroll;*/
+	margin: 0;
+}
+
+.center {
+	width: max-content;
+	max-width: 100%;
+	margin: auto;
+} 
+
+.center * {
+	word-break: break-all;
+} 
+
+.alert-yellow, button[type="submit"] {
+	background-color: rgb(230,171,23);
+}
+
+input {
+	/* 44 - 2 = 42, 2px is the border height (T & B) */
+	height: 42px;
+	padding: 0;
+	padding-left: 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 100px;
+}
+
+button[type="submit"] {
+	width: 44px;
+	height: 44px;
+	padding: 10px;
+	border: 0;
+	border-radius: 100%;
+}
+
+button[type="submit"]:hover {
+	background-color: rgb(199,149,2);
+}
+
+a {
+	color: rgb(230,171,23);
+}
+
+a:hover {
+	color: rgb(199,149,2);
+}

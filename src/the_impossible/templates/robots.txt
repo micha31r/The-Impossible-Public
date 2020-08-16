@@ -1,0 +1,5 @@
+#Allbots
+User-agent: *
+Disallow: /idea/edit
+Disallow: /userupload
+Disallow: /user/signup

@@ -1,0 +1,156 @@
+nav {
+	width: 100vw;
+	position: fixed !important;
+	top: 0;
+	padding: 20px !important;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	font-family: "Arciform", sans-serif;
+	background-color: var(--color-first);
+	z-index: 50; /* Make sure the navbar always stay on top */
+	/*box-shadow: 0 0 10px rgba(0,0,0,0.1);*/
+	border-bottom-width: 2px;
+	border-style: solid;
+	border-color: var(--color-ten); 
+}
+
+/* 768 is the collapse point of the medium sized navbar */
+@media only screen and (max-width: 768px) {
+	.navbar form {
+		display: none;
+	}
+} 
+
+.navbar-logo {
+	margin-right: 15px;
+	filter: var(--invert-filter);
+}
+
+/* Search form */
+
+.navbar form {
+	max-height: 100%;
+	margin: 0 !important;
+}
+
+.navbar form input {
+	font-family: sans-serif;
+	height: max-content;
+	border-radius: 200px;
+	background-color: var(--color-second);
+	color: var(--color-six);
+	border: 0;
+	padding: 10px;
+}
+
+.navbar form input:focus {
+	background-color: var(--color-third);
+}
+
+.navbar form input::placeholder {
+	color: var(--color-four);
+}
+
+.navbar form button {
+	padding-left: 6px;
+}
+
+/* ----------- */
+
+.nav-item, nav button {
+	font-size: 1.3rem !important;
+	text-align: center; 
+}
+
+nav .btn:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.navbar-toggler {
+	border: 0;
+}
+
+.nav-link {
+	padding: 0;
+	padding-left: 3px !important;
+	padding-right: 3px !important;
+}
+
+/* Svg icon stuff */
+
+nav .svg-wrapper {
+	display: block;
+	width: max-content;
+	height: max-content;
+	vertical-align: middle;
+	border-radius: 100%;
+	background-color: var(--color-second);
+}
+
+nav .svg-wrapper:hover {
+	background-color: var(--color-third);
+}
+
+nav .svg-wrapper svg {
+	margin: 10px;
+	filter: var(--invert-filter);
+}
+
+/* ------------ */
+
+.dropdown-menu {
+	width: max-content;
+	height: max-content;
+	/* 60px is the navheight */
+	max-height: calc(100vh - 60px);
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--color-ten);
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px var(--color-seven);
+	overflow: scroll;
+	font-family: "Lato", sans-serif;
+	padding: 0;
+	background-color: var(--color-first);
+}
+
+@media only screen and (max-width: 380px) {
+	/* Align dropdown in the middle of the screen on mobile aspect ratio */
+	.dropdown-menu {
+		/* 40px is the navbar padding (L & R) */
+		width: calc(100vw - 40px);
+		/* 44px is the width of 1 nav button */
+		/* 6px is the space between nav buttons */
+		right: calc(-44px - 6px);
+	}
+}
+
+.dropdown-item {
+	width: calc(100% - 20px);
+	margin: 10px;
+	padding: 10px;
+	border-radius: 10px;
+	color: var(--color-six) !important;
+}
+
+.dropdown-menu svg {
+	margin-right: 10px;
+	vertical-align: top;
+	filter: var(--invert-filter);
+}
+
+.dropdown-menu span {
+	color: var(--color-six);
+}
+
+.dropdown-menu *:hover {
+	background-color: var(--color-second);
+}
+
+.dropdown-divider {
+	padding: 0;
+	border-color: var(--color-ten);
+	border-width: 1px;
+	border-radius: 0;
+}

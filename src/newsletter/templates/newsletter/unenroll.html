@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Unenroll from newsletter - The Impossible</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Reset CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/reset.css' %}">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<!-- favicon image -->
+	    <link rel="icon" href="{% static 'component/base/favicon.png' %}">
+	</head>
+	<body>
+		<link rel="stylesheet" type="text/css" href="{% static 'newsletter/unenroll_page/main.css' %}">
+
+		<div class="wrapper">
+			<div class='row align-items-center h-100'>
+				<div class="center">
+					<h2>We are sorry to see you go</h2>
+					<h6>Emails from the The Impossible will no longer be sent to {% if email %}<a href="mailto: {{ email }}">{{ email }}</a>{% else %}this address{% endif %}.</h6>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

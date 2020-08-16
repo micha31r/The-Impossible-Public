@@ -1,0 +1,45 @@
+{% load static %}
+{% load tags %}
+
+<form method="post">
+	{% csrf_token %}
+
+	<!-- Show error -->
+	{% if error %}
+		<div class="alert alert-black" role="alert">
+	  		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+	  		{{ error|escape }}
+		</div>
+	{% endif %}
+
+	{% include 'form_error.html' %}
+
+	<h5>{{ form.email.label }}:</h5>
+	{{ form.email }}
+
+	<hr class="section-seperator">
+
+	<h5>{{ form.frequency.label }}:</h5>
+	{% for radio in form.frequency %}
+		<div class="radio">
+		    {{ radio }}
+		</div>
+	{% endfor %}
+
+	<hr class="section-seperator">
+
+	<h5>Last sent:</h5>
+	<p>{{ profile.subscriber.last_sent }}</p>
+
+	<!-- Add span element to each radio button -->
+	<!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio -->
+	<script type="text/javascript">
+		$( ".radio label" ).each(
+			function() {
+				$(this).append("<span class='checkmark'></span>");
+			}
+		);
+	</script>
+	
+	<button class="btn btn-yellow bold" type="submit">Update Settings</button>
+</form>

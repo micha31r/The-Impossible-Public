@@ -1,0 +1,321 @@
+nav, footer {
+	display: none !important;
+}
+
+.section-seperator {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	border-top-width: 1px;
+}
+
+.wrapper {
+	padding: 0;
+	height: 100vh;
+}
+
+.center {
+	width: max-content;
+	max-width: 100%;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.close-window-wrapper {
+	width: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-bottom: 40px;
+	text-align: right;
+}
+
+.close-window-wrapper button {
+	padding: 0;
+}
+
+.close-window svg {
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	filter: var(--invert-filter);
+}
+
+.close-window svg:hover {
+	padding: 8px;
+	border-style: solid;
+	border-radius: 100%;
+	border-width: 2px;
+	border-color: var(--color-third);
+}
+
+.table-wrapper {
+	width: max-content;
+	max-width: 100%;
+	margin: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--color-ten);
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+#menu {
+	vertical-align: top;
+	padding: 40px;
+	padding-left: 0;
+	padding-right: 0;
+	border-right-width: 1px;
+	border-style: solid;
+	border-color: var(--color-ten);
+}
+
+#menu a {
+	display: block;
+	padding: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin: 0;
+	border-left-width: 3px;
+	border-style: solid;
+	border-color: transparent;
+	color: var(--color-six);
+	white-space: nowrap;
+}
+
+#menu a:hover {
+	background-color: var(--color-second);
+	border-color: var(--color-ten);
+	text-decoration: none;
+}
+
+#menu .active-link {
+	border-left-width: 3px;
+	border-style: solid;
+	border-color: var(--color-six) !important;
+}
+
+.form-wrapper {
+	width: max-content;
+	/* max-width is set through JS */
+	overflow: scroll;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+form {
+	padding-left: 40px;
+	padding-right: 40px;
+	min-width: 500px;
+	width: max-content;
+	vertical-align: top;
+}
+
+form h5 {
+	font-size: 2rem;
+	margin-bottom: 20px;
+	color: var(--color-six);
+}
+
+/* Hide the default error list */
+.errorlist {
+	background-color: var(--color-first);
+}
+
+label, p {
+	font-size: 1.1rem;
+	color: var(--color-six);
+}
+
+/* Custom Radio Button */
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio */
+
+.radio label {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio label input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 24px !important;
+	width: 24px !important;
+	border-width: 4px;
+	border-style: solid;
+	border-color: var(--color-second);
+	border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio label:hover input ~ .checkmark {
+	border-color: var(--color-third);
+}
+
+/* When the radio button is checked, add a yellow background */
+.radio label input:checked ~ .checkmark {
+	border: 0;
+  	background-color: var(--color-brand);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio label input:checked ~ .checkmark:after {
+	display: block;		
+}
+
+/* Style the indicator (dot/circle) */
+.radio label .checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 12px !important;
+	height: 12px !important;
+	border-radius: 50%;
+	background: #fff;
+}
+	
+/* ---------- */
+
+input, textarea {
+	width: 100%;
+	border: 0;
+	border-radius: 10px;
+	font-size: 1rem;
+	padding: 10px;
+	background-color: var(--color-second);
+	color: var(--color-six);
+	margin-bottom: 15px;
+}
+
+textarea {
+	height: 150px;
+	min-height: 150px;
+	max-height: 200px;
+}
+
+input::placeholder, textarea::placeholder {
+	color: var(--color-four);
+}
+
+input:focus, textarea:focus {
+	outline: none;
+	background-color: var(--color-third);
+}
+
+select {
+	display: block;
+	border-radius: 10px;
+	padding: 10px;
+	border-width: 1px;
+	border-color: var(--color-ten);
+	min-width: 200px;
+	background-color: var(--color-first);
+}
+
+option {
+	color: var(--color-six);
+}
+
+button[type="submit"] {
+	margin-top: 40px;
+	border-radius: 100px;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#minify-menu {
+	display: none;
+}
+
+#minify-menu table {
+	height: max-content;
+}
+
+@media only screen and (max-width: 700px) {
+	.row {
+		max-width: 100% !important;
+		margin: auto !important;
+		height: max-content !important;
+	}
+	.center {
+		width: 90%;
+		padding-bottom: 0;
+	}
+	.table-wrapper {
+		width: 100%;
+	}
+	.table-wrapper * {
+		width: 100%;
+		max-width: 100%;
+	}
+	form {
+		min-width: 300px;
+	}
+	#menu {
+		display: none;
+	}
+	#minify-menu {
+		display: block;
+		width: 100%;
+		margin-top: 40px;
+		margin-bottom: 40px;
+		border-width: 1px;
+		border-style: solid;
+		border-color: var(--color-ten);
+		padding: 40px;
+		border-radius: 20px;
+	}
+	#menu {
+		width: 100vw;
+		padding: 40px;
+		padding-bottom: 0;
+		border: 0;
+	}
+	#minify-menu a {
+	 	display: block;
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		color: var(--color-six);
+		border-radius: 100px;
+		margin: auto;
+		margin-top: 0;
+		margin-bottom: 5px;
+		text-align: center;
+		border-width: 1px;
+		border-style: solid;
+		border-color: var(--color-ten);
+	}
+	#minify-menu a:hover {
+		text-decoration: none;
+		color: var(--color-eleven);
+		background-color: var(--color-third);
+	}
+	#minify-menu .active-link {
+		background-color: var(--color-eleven) !important;
+		color: var(--color-first) !important;
+	}
+}

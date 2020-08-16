@@ -1,0 +1,157 @@
+nav, footer {
+	display: none !important;
+}
+
+.wrapper {
+	padding: 0;
+	height: 100vh;
+}
+
+.center {
+	width: max-content;
+	max-width: 100%;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.close-window-wrapper {
+	width: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-bottom: 40px;
+	text-align: right;
+}
+
+.close-window-wrapper button {
+	padding: 0;
+}
+
+.close-window svg {
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	filter: var(--invert-filter);
+}
+
+.close-window svg:hover {
+	padding: 8px;
+	border-style: solid;
+	border-radius: 100%;
+	border-width: 2px;
+	border-color: var(--color-third);
+}
+
+@media only screen and (max-width: 700px) {
+	.row {
+		max-width: 100% !important;
+		margin: auto !important;
+		height: max-content !important;
+	}
+	.center {
+		width: 90%;
+	}
+}
+
+.content-wrapper {
+	width: 600px;
+	max-width: 100%;
+	min-height: 400px;
+	height: 90vh;
+	max-height: 700px;
+	border-color: var(--color-ten);
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+@media only screen and (max-width: 500px) {
+	.content-wrapper {
+		width: 100%;
+	}
+}
+
+.tab-switcher {
+	width: 100%;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 0;
+	border-color: var(--color-ten);
+	border-style: solid;
+	border-bottom-width: 1px;
+}
+
+.follower-tab, .following-tab {
+	display: inline-block;
+	width: calc((100% - 8px) / 2);
+	padding-bottom: 20px;
+	text-align: center;
+	border-color: transparent;
+	border-style: solid;
+	border-bottom-width: 3px;
+	margin: 0;
+	color: var(--color-six);
+}
+
+h3[name="current"] {
+	color: var(--color-brand);
+	border-color: var(--color-brand);
+}
+
+.follower-container, .following-container {
+	overflow: scroll;
+	border-radius: 20px;
+}
+
+.profile-wrapper {
+	border-color: var(--color-ten);
+	border-style: solid;
+	border-bottom-width: 1px;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.target-profile-img-wrapper {
+	display: inline-block; 
+	margin-right: 10px;
+	vertical-align: top; 
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	background-color: var(--color-six);
+}
+
+.target-profile-img {
+	height: 100%;
+}
+
+.profile-content-wrapper {
+	display: inline-block;
+	width: calc(100% - 70px);
+}
+
+.profile-content-wrapper h6, p {
+	color: var(--color-six);
+	margin: 0;
+}
+
+.profile-content-wrapper a {
+	color: var(--color-brand-dark);
+}
+
+.profile-content-wrapper a:hover {
+	color: var(--color-brand);
+}
+
+.profile-content-wrapper .username {
+	color: var(--color-four);
+}
+
+.profile-content-wrapper .username:hover {
+	color: var(--color-five);
+	text-decoration: none;
+}
+
+

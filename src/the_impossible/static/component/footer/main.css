@@ -1,0 +1,70 @@
+footer {
+	height: max-content;
+	background-color: var(--color-first);
+	padding: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: 0;
+	border-style: solid;
+	border-top-width: 2px;
+	border-color: var(--color-ten);
+	font-family: 'Varela Round', sans-serif;
+}
+
+
+footer table {
+	margin: 0 !important;
+	width: 100% !important;
+}
+
+footer table * {
+	border: 0px !important;
+}
+
+footer td {
+	padding: 0px !important;
+}
+
+@media only screen and (max-width: 320px) {
+	footer td {
+		text-align: center !important;
+	}
+}
+
+footer p {
+	margin: 0px;
+	background-color: transparent;
+}
+
+footer button {
+	font-family: Arciform, sans-serif;
+	font-size: 1.3rem;
+	outline: none !important;
+	border: none;
+	color: var(--color-six);
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: transparent; 
+	background-color: transparent;
+	padding: 0px;
+	margin: 0px;
+} 
+
+footer .contact * {
+	stroke: var(--color-first);
+	fill: var(--color-six);
+}
+
+footer .brand-name {
+	font-family: Arciform, sans-serif;
+	font-size: 1.2rem !important;
+}
+
+footer #contact-td {
+	text-align: right;
+}
+
+footer .time {
+	color: grey
+}

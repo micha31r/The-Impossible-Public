@@ -1,0 +1,54 @@
+<!-- Do this in production -->
+<!-- For everylink add http://theimpossible.world before url and static -->
+
+{% load static %}
+{% load tags %}
+{% block html %}
+	{% load inlinecss %}
+	{% inlinecss "usermgmt/templated_email/verification.css" %}
+		<head>
+			<!-- Required meta tags -->
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		</head>
+		<body>
+			<table class="nav">
+				<tr>
+					<td class="logo-td">
+						<img alt="the impossible logo" src="http://theimpossible.world{% static 'component/base/logo_white.svg' %}">
+					</td>
+					<td>
+						<p class="text">
+							<a class="my-account" href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
+						</p>
+					</td>
+				</tr>
+			</table>
+
+			<div class="wrapper">
+				<div class="content-container">
+					<h3><b>Your 6 digit verification code is:</b></h3>
+					<h1 class="code">{{ verification_code }}</h1>
+					<p>You received this message because you signed up for an account at <b>The Impossible</b>. To activate your account, enter this code when you sign in. (If this is not requested by you, please ignore this email)</p>
+					<p>For more support, email <a class="yellow" href="mailto:hello@theimpossible.world"><b>hello@theimpossible.world</b></a></p>
+				</div>
+			</div>
+
+			<footer>
+				<table class="table">
+					<tr>
+						<td>
+							<button class="brand-name" onclick="window.location.href='http://theimpossible.world{% url 'home_page' %}'"><b>THE IMPOSSIBLE @ 2020</b></button>
+						</td>
+						<td id="contact-td">
+							<div class="contact">
+								<button onclick="window.location.href='https://www.instagram.com/micha31r/'"><img alt="" src="http://theimpossible.world{% static 'usermgmt/templated_email/twitter.svg' %}"></button>
+								<button onclick="window.location.href='https://twitter.com/micha31_r'"><img alt="" src="http://theimpossible.world{% static 'usermgmt/templated_email/instagram.svg' %}"></button>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</footer>
+		</body>
+	{% endinlinecss %}
+{% endblock %}

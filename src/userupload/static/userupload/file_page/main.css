@@ -1,0 +1,127 @@
+:root {
+	/* css variables */
+	--form-width: 600px;
+
+	/* file display dimension */
+	/* for images and videos only */
+	--image-width: 100%;
+	--width-height: 400;
+}
+
+.main-container input {
+	width: 100%;
+	min-width: 200px;
+	padding: 10px;
+	border: 0;
+	border-radius: 10px;
+	background-color: var(--color-second);
+	color: var(--color-six);
+	margin-bottom: 20px;
+	font-size: 2rem;
+}
+
+.main-container input::placeholder {
+	color: var(--color-four);
+}
+
+.main-container input:focus {
+	outline: none;
+	background-color: var(--color-third);
+}
+
+@media only screen and (max-width: 720px) {
+	.form-wrapper {
+		width: 100% !important;
+	}
+}
+
+.form-wrapper {
+	width: var(--form-width);
+	margin: auto;
+}
+
+#tooltip {
+	display: none;
+}
+
+#tooltip[data-show] {
+	display: block;
+}
+
+#hidden {
+	width: 100%;
+	opacity: 0;
+}
+
+#id_file {
+	display: none;
+	font-size: 1rem;
+}
+
+#file-wrapper {
+	width: 100%;
+	max-height: 1000px;
+	border-radius: 10px;
+	background-color: var(--color-twelve);
+	background-size: cover;
+    background-position: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#file-wrapper table {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+#blur {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+ 	border-radius: 10px;
+	background-color: rgb(0,0,0);
+	transition: opacity 0.3s;
+	opacity: 0;
+	z-index: 1; 
+}
+
+.spinner-border {
+	display: none;
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+#file-button, .main-container button[type="submit"], .delete-btn {
+	transition: opacity 0.3s;
+	opacity: 0;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 100px;
+}
+
+.main-container button[type="submit"], .delete-btn {
+	opacity: 1;
+}
+
+/* Timestamp */
+
+.timestamp {
+	font-family: 'Arciform', sans-serif;
+	margin-top: 20px;
+	width: 100%;
+	text-align: right;
+}
+
+.timestamp p {
+	margin: 0;
+	color: var(--color-third);
+}
+
+.timestamp .time {
+	color: var(--color-four);
+}

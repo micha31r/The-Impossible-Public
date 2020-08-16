@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Verification - The Impossible</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Reset CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/reset.css' %}">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/main.css' %}">
+
+		<!-- favicon image -->
+	    <link rel="icon" href="{% static 'component/base/favicon.png' %}">
+	</head>
+	<body>
+		<link rel="stylesheet" type="text/css" href="{% static 'usermgmt/verify_page/main.css' %}">
+
+		<script type="text/javascript" src="{% static 'usermgmt/verify_page/count_down.js' %}"></script>
+
+		<script type="text/javascript">
+			var resend_link = "{% url 'send_code_view' username=user.username %}";
+		</script>
+		
+		<div class="wrapper">
+			<div class='row align-items-center h-100'>
+				<div class="center">
+					<h2>Email Verification</h2>
+					<h6>(Please enter the code sent to you)</h6>
+					<form method="post">
+				    	{% csrf_token %}
+
+				    	<!-- Show error -->
+						{% if error %}
+							<div class="alert alert-yellow" role="alert">
+						  		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+						  		{{ error|escape }}
+							</div>
+						{% endif %}
+
+						{{ form.code }}
+						<button class="btn btn-yellow bold" type="submit">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+						</button>
+					</form>
+					<br>
+					<a href="#" onclick="start_timer();return false;" style="float: right;"><b id="resend-link-text">Resend</b></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

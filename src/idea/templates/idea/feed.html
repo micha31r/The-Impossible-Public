@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+
+{% block title %}
+	<title>Feed - The Impossible</title>
+{% endblock %}
+
+{% block content %} 
+	<div class="wrapper">
+		<link rel="stylesheet" type="text/css" href="{% static 'idea/feed_page/main.css' %}"> 
+
+		<div class='row align-items-center h-100'>
+			<div class="center">
+				<div class="close-window-wrapper">
+					<button class="btn close-window" onclick="window.location.href='{% url 'idea_explore_page' week_num=date.week page_num=1 %}'">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+					</button>
+				</div>
+				<h1 class="header"><b>Recent Activities</b></h1>
+				{% if recent_ideas or core_feed %}
+					<div class="feed-container">
+						{% for idea in recent_ideas %}
+							<div class="feed-card">
+								<p class="content-type">Recently created by people you follow</p>
+								<div class="text-wrapper">
+									<h4><a href="{% url 'idea_detail_page' pk=idea.pk %}"><b>{{ idea.name }}</b></a></h4>
+									<h6>{{ idea.short_description }}</h6>
+								</div>
+								{% if idea.header_img %}
+									<img alt="header image" src="{{ idea.header_img.file.url }}">
+								{% endif %}
+								<div class="text-wrapper">
+									<p>{{ idea.full_description|truncatechars:400 }}</p>
+									<br>
+									<p class="author">By {{ idea.author }}</p>
+									<p class="timestamp">Views {{ idea.viewed_user.all|length }}</p>
+								</div>
+							</div>
+						{% endfor %}
+
+						<!-- The Impossible messages -->
+						{% for feed in core_feed %}
+							<div class="feed-card">
+								<p class="content-type">The Impossible's message</p>
+								<div class="text-wrapper">
+									<h4><b>{{ feed.name|safe }}</b></h4>
+									<p>{{ feed.description|safe }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% else %}
+					<p class="no-feed"><b>No feed avaliable</b></p>
+					<style type="text/css">
+						@media only screen and (max-width: 700px) {
+							.row {
+								height: 100vh !important;
+							}
+							.center {
+								width: max-content;
+							}
+						}
+					</style>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

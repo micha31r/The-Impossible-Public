@@ -1,0 +1,78 @@
+.notification-container {
+	display: inline-block;
+	background-color: var(--color-twelve);
+	padding: 20px;
+	padding-bottom: 0;
+	width: 400px;
+	/* Height is set through JS */
+	vertical-align: top;
+	border-radius: 20px;
+	overflow: hidden; /* Just in case ... */
+	/*box-shadow: 0px 10px 15px rgba(0,0,0,0.2);*/
+}
+
+.notification-container h2 {
+	font-size: 1.8rem;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.notification-container h2 a {
+	color: var(--color-six);
+}
+
+.notification-container h2 a:hover {
+	color: var(--color-five);
+	text-decoration: none;
+}
+
+/* Unread notification alert dot */
+.new-notification-count {
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 100%;
+	font-size: 0.7rem;
+	line-height: 0.7rem;
+	padding: calc((1rem - 0.7rem) / 2);
+}
+
+.notification-container {
+	max-height: 500px;
+}
+
+.notification-container h2 svg {
+	vertical-align: text-bottom;
+	height: 2rem;
+	stroke: var(--color-six);
+}
+
+.message-container {
+	/* Height is set through js */
+	max-height: 600px; /* Just in case ... */
+	overflow-y: scroll;
+}
+
+.message-wrapper h6 {
+	color: var(--color-six);
+	margin-bottom: 0;
+	word-break: break-all;
+}
+
+.message-wrapper a {
+	color: var(--color-brand-dark);
+	margin-bottom: 0;
+}
+
+.message-wrapper a:hover {
+	text-decoration: underline;
+}
+
+.message-wrapper p {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	color: var(--color-five);
+	border-bottom-width: 1px;
+	border-style: solid;
+	border-color: var(--color-ten);
+}

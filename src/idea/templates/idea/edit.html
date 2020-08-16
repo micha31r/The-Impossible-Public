@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	<title>{{ idea.name }} - The Impossible</title>
+{% endblock %}
+
+{% block content %}
+	<!-- Main css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'idea/edit_page/main.css' %}">
+
+	<!-- Mobile js -->
+	<script type="text/javascript" src="{% static 'component/base/mobile.js' %}"></script>
+	
+	<!-- Resize js -->
+	<script type="text/javascript" src="{% static 'idea/edit_page/resize.js' %}"></script>
+
+	<!-- Delete confirm js -->
+	<script type="text/javascript" src="{% static 'idea/edit_page/delete_confirm.js' %}"></script>
+
+	<div class="wrapper">
+		<form method="post">
+	    	{% csrf_token %}
+
+	    	<!-- Show errors -->
+			{% if error %}
+				<div class="alert alert-black bold" role="alert">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+	                {{ error|escape }}
+	            </div>
+			{% endif %}
+
+			{% include 'form_error.html' %}
+
+	    	<table>
+	    		<tr id="append-origin1">
+	    			<td id="idea-content">
+						<p>{{ form.name }}</p>
+						<p>{{ form.short_description }}</p>
+						<p>{{ form.full_description }}</p>
+					</td>
+					<td id="idea-setting">
+						<h1><b>Settings</b></h1>
+						<br>
+						<table class="tags">
+							<tr id="append-origin2">
+								<td class="select-tags">
+									<!-- Tags -->
+									<h5><b>{{ form.tags.label }}({{ tags.count }}):</b></h5>
+									<p>{{ form.tags_remain }}</p>
+								</td>
+								<td id="exsisting-tag">
+									<h5><b>{{ form.tags_remain.label }}({{ idea.tags.count }}):</b></h5>
+									{{ form.tags }}
+								</td>
+							</tr>
+							<tr id="append-target2"></tr>
+							<tr class="publish-status" id="append-origin3">
+								<td>
+									<!-- Publish stats -->
+									<h5><b>{{ form.publish_status.label }}:</b></h5>
+									<p>{{ form.publish_status }}</p>
+								</td>
+								<td id="delete-button">
+									<!-- Delete button -->
+									<h5><b>Delete Idea:</b></h5>
+									<p id="hidden" style="display:none;">{{ form.delete }}</p>
+									<button class="btn btn-black-outline bold" id="confirm-button" onclick="click_confirm('hidden','confirm-button'); return false;">Reveal</button>
+								</td>
+							</tr>
+							<tr id="append-target3"></tr>
+						</table>
+					</td>
+				</tr>
+				<tr id="append-target1">
+				</tr>
+			</table>
+			<button class="btn btn-dark btn-yellow bold" type="submit">Save Changes</button>
+			<div class="idea-image">
+				<h1><b>Images</b></h1>
+				<br>
+				<div class="horizontal-overflow-wrapper">
+					<div class="horizontal-container">
+						<!-- Header image -->
+						<div class="file-wrapper">
+							<button class="btn file-button" name="redirect_img" data-toggle="popover" data-trigger="hover" 
+							title="Header image" data-content="Click to change" value="{% if idea.header_img %}{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk=idea.header_img.pk field='header' %}{% else %}{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk='None' field='header' %}{% endif %}">
+								{% if idea.header_img.file %}
+									<img alt="header image" class="header-img" src="{{ idea.header_img.file.url }}">
+								{% else %}
+									<table class="no-content-text header-img">
+									    <tr>
+									    	<td class="align-middle">
+												<h1><span>No Header Image</span></h1>
+											</td>
+										</tr>
+									</table>
+								{% endif %}
+							</button>
+						</div>
+						<!-- Body images -->
+						{% for image in idea.body_img.all %}
+							<div class="file-wrapper">
+								<button class="btn file-button" name="redirect_img" data-toggle="popover" data-trigger="hover" 
+							title="Body image" data-content="Click to change" value="{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk=image.pk field='body' %}"><img alt="body image" src="{{ image.file.url }}"></button>
+							</div>
+						{% endfor %}
+						<!-- Add body image -->
+						<div class="file-wrapper">
+								<button class="btn file-button file-button-add" name="redirect_img" data-toggle="popover" data-trigger="hover" 
+							title="Body image" data-content="Click to add" value="{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk='None' field='body' %}">+</button>
+						</div>
+						<!-- Show tooltip after hover -->
+						<script type="text/javascript">
+							if (!window.mobileAndTabletCheck()) {
+								$('.file-button').popover({
+									trigger: 'hover'
+								})
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!-- Timestamp -->
+		<div class="timestamp">
+			<p>Created at <span class="time">{{ idea.timestamp }}</span></p>
+			<p>Last Edited <span class="time">{{ idea.last_edit }}</span></p>
+		</div>
+	</div>
+{% endblock %}

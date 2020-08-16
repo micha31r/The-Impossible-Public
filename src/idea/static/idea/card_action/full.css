@@ -1,0 +1,44 @@
+:root {
+	/* card button size */
+	--card-button-size: 50px;
+	--card-button-margin-left: 10px;
+}
+
+.card-btn-circle {
+	display: none;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	margin-left: var(--card-button-margin-left);
+	width: var(--card-button-size);
+	height: var(--card-button-size);
+	/* Move button up */
+	margin-top: calc(var(--card-button-size) / -2) !important;
+	/* Remove space from bottom */
+	margin-bottom: calc(var(--card-button-size) / -2) !important;
+	border-radius: 100%;
+	background-color: var(--color-first);
+	opacity: 0;
+	animation-duration: 0.3s;
+	animation-fill-mode: forwards;
+}
+
+.circle-btn-bookmark:hover {
+	background-color: rgb(246,227,147);
+}
+
+.circle-btn-like {
+	margin-left: calc(var(--card-button-size) + (var(--card-button-margin-left) * 2));
+}
+
+.circle-btn-like:hover {
+	background-color: rgb(255,194,205);
+}
+
+*[name="liked"] {
+	fill: rgb(252,52,104);
+}
+
+*[name="starred"] {
+	fill: rgb(240,165,0);
+}

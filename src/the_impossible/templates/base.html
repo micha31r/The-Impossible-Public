@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<meta name="description" content="A social media platform focused on discussing and sharing ideas.">
+  		<meta name="keywords" content="idea, ideas, share ideas, new ideas, creative ideas, project ideas, innovative ideas, idea sharing platform, theimpossible, the impossible, theimpossible world, the impossible world, social media">
+
+		<!-- Reset CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/reset.css' %}">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<!-- favicon image -->
+        <link rel="icon" href="{% static 'component/base/favicon.png' %}">
+
+		<!-- Fonts -->
+		<style>
+			@font-face {
+			  font-family: Arciform;
+			  src: url({% static 'component/font/Arciform.ttf' %});
+			}
+		</style>
+
+		<!-- For loading screen: -->
+		<style>
+			@keyframes rotate-center {
+				from {
+					transform: translate(-50%,-50%) rotate(0deg);
+				}
+				to {
+					transform: translate(-50%,-50%) rotate(360deg);
+				}
+			}
+			#loader-bg {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: var(--color-first);
+				/* Make sure this stays above all elements */
+				z-index: 100;
+			}
+			#loader {
+				position: fixed;
+				width: 10%;
+				min-width: 100px;
+				top: 50%;
+				left: 50%;
+				animation-name: rotate-center;
+				animation-duration: 1.5s;
+				animation-fill-mode: forwards;
+				animation-iteration-count: infinite;
+				z-index: 101;
+			}
+		</style>
+		<script>
+			document.onreadystatechange = function() { 
+		    if (document.readyState !== "complete") { 
+		        document.querySelector("body").style.visibility = "hidden"; 
+		        document.querySelector("#loader").style.visibility = "visible"; 
+		        document.querySelector("#loader-bg").style.visibility = "visible"; 
+		    } else { 
+		        document.querySelector("#loader").style.display = "none"; 
+		        document.querySelector("#loader-bg").style.display = "none"; 
+		        document.querySelector("body").style.visibility = "visible"; 
+		    } 
+		}; 
+		</script>
+
+		{% block title %}
+		{% endblock %}
+	</head>
+	<body>
+		<!-- Base js -->
+		<script type="text/javascript" src="{% static 'component/base/main.js' %}"></script>
+
+		<!-- Create auto task queue -->
+		<script type="text/javascript">
+			auto_run = new AutoRun();
+			window.onload = function() {
+				auto_run.execute();
+				active_link();
+			}
+		</script>
+
+		<!-- Color theme css and color-theme-toggleer js -->
+		<!-- MUST import these two files before loading screen elements  -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/color_theme.css' %}">
+
+		<script type="text/javascript" src="{% static 'component/base/color_theme.js' %}"></script>
+
+		<!-- Loading screen image and background -->
+		<div id="loader-bg"></div>
+		<img alt="" src="{% static 'component/base/logo.svg' %}" id="loader">
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<!-- Cross page css-->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/main.css' %}">
+
+		<!-- Resize js -->
+		<script type="text/javascript" src="{% static 'component/base/resize.js' %}"></script>
+
+		<!-- Element label js -->
+		<script type="text/javascript" src="{% static 'component/base/element_label.js' %}"></script>
+
+		<!-- Navbar -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/navbar/main.css' %}">
+
+		<nav class="navbar navbar-expand navbar-light">
+			<a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'idea_explore_page' week_num=date.week page_num=1 %}{% else %}{% url 'home_page' %}{% endif %}">
+				<svg class="navbar-logo" width="50" height="50" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M250 125C250 194.036 194.036 250 125 250C96.6558 250 70.5151 240.566 49.5464 224.667L68.6005 205.613C84.4816 216.578 103.741 223 124.5 223C178.9 223 223 178.9 223 124.5C223 103.741 216.578 84.4816 205.613 68.6005L224.667 49.5464C240.566 70.5151 250 96.6558 250 125ZM185.013 46.774L203.814 27.9726C182.31 10.4834 154.879 0 125 0C55.9644 0 0 55.9644 0 125C0 154.879 10.4834 182.31 27.9726 203.814L46.774 185.013C33.7556 168.315 26 147.313 26 124.5C26 70.1 70.1 26 124.5 26C147.313 26 168.315 33.7556 185.013 46.774Z" fill="black"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M84.9445 185.269L185.269 84.9445C192.688 96.3196 197 109.906 197 124.5C197 164.541 164.541 197 124.5 197C109.906 197 96.3196 192.688 84.9445 185.269Z" fill="black"/>
+					<circle cx="214" cy="15" r="4" fill="black"/>
+					<circle cx="14" cy="43" r="5" fill="black"/>
+					<circle cx="181" cy="244" r="4" fill="black"/>
+					<circle cx="237" cy="206" r="5" fill="black"/>
+					<circle cx="27" cy="10" r="5" fill="black"/>
+				</svg>
+			</a>
+			<form class="form-inline my-2 my-lg-0" action="{% url 'idea_search_page' page_num=1 name=None %}">
+	      		<input placeholder="Search Idea" name="name" required="required">
+	      		<button class="btn" type="submit">
+	      			<span class="svg-wrapper">
+	      				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+	      			</span>
+	      		</button>
+	    	</form>
+			<ul class="navbar-nav mr-auto">
+			</ul>
+	    	<ul class="navbar-nav navbar-right">
+	    		{% block nav_custom %}
+	    			<li class="nav-item">
+		        		<a class="nav-link has-label" href="{% url 'idea_explore_page' week_num=date.week page_num=1 %}">
+		        			<span class="svg-wrapper">
+		        				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+		        			</span>
+		        			<p class="element-label">Explore</p>
+		        		</a>
+		      		</li>
+		      		{% if user.is_authenticated %}
+			      		<li class="nav-item">
+			        		<a class="nav-link has-label" href="{% url 'account_dashboard_page' username=user.username content_filter='my' page_num=1 %}">
+			        			<span class="svg-wrapper">
+			        				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+			        			</span>
+			        			<p class="element-label">Dashboard</p>
+			        		</a>
+			      		</li>
+			      	{% endif %}
+	    		{% endblock %}
+	    		{% if user.is_authenticated %}
+	    			<li class="nav-item">
+		        		<a class="nav-link has-label" href="{% url 'logout_page' %}">
+		        			<span class="svg-wrapper">
+		        				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+		        			</span>
+		        			<p class="element-label">Logout</p>
+		        		</a>
+		      		</li>
+	    		{% else %}
+		      		<li class="nav-item">
+		        		<a class="nav-link has-label" href="{% url 'login_page' %}">
+		        			<span class="svg-wrapper">
+		        				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+		        			</span>
+		        			<p class="element-label">Login</p>
+		        		</a>
+		      		</li>
+		      		<li class="nav-item">
+		        		<a class="nav-link has-label" href="{% url 'signup_page' %}">
+		        			<span class="svg-wrapper">
+		        				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+		        			</span>
+		        			<p class="element-label">Sign Up</p>
+		        		</a>
+		      		</li>
+		      	{% endif %}
+		    </ul>
+		</nav>
+
+		<div class="main-container">
+			{% block content %}
+			{% endblock %}
+		</div>
+
+		{% include 'footer.html' %}
+
+		<script type="text/javascript" src="{% static 'component/base/no_resubmission.js' %}"></script>
+	</body>
+</html>

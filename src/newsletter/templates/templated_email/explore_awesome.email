@@ -1,0 +1,166 @@
+<!-- Its a mess ... -->
+<!-- Do this in production -->
+<!-- For everylink add http://theimpossible.world before url and static -->
+
+{% load static %}
+{% load tags %}
+{% block html %}
+	{% load inlinecss %}
+	{% inlinecss "newsletter/templated_email/explore.css" %}
+		<head>
+			<!-- Required meta tags -->
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		</head>
+		<body>
+			<table class="nav">
+				<tr>
+					<td class="logo-td">
+						<img src="http://theimpossible.world{% static 'component/base/logo_white.svg' %}">
+					</td>
+					<td>
+						<p class="text">
+							<a class="my-account" href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
+						</p>
+					</td>
+				</tr>
+			</table>
+
+			<div class="wrapper">
+				<!-- Changing these inline css to external css will break it -->
+				<!-- Inline css really isn't my thing ... -->
+				<div class="header-wrapper" style="margin-left: calc((100% - 600px - 80px) / 2);">
+					<div class="content-container" style="transform-origin: top left; transform: rotate(90deg) translate(60px,-680px); width: max-content; position: absolute;">
+						<p>The Impossible's</p>
+						<h1 class="header">Suggestions</h1>
+						<h3 class="week-num"><b>From week {{ date.week }}</b></h3>
+					</div>
+					<img src="http://theimpossible.world{% static 'newsletter/templated_email/tree.jpg' %}" style="width: 500px; max-width: 100%;">
+				</div>
+				<style type="text/css">
+					@media only screen and (max-width: 720px) {
+						.header-wrapper {
+							margin: 0 !important;
+						}
+						.header-wrapper .content-container {
+							/* 80px is from .wrapper padding, the other 80px is from itself */
+							margin-top: 40px !important;
+							transform: none !important;
+							background-color: rgba(0,0,0,0.6) !important;
+						}
+						.header-wrapper .content-container * {
+							color: #fff !important;
+						}
+						.header-wrapper img {
+							width: 100% !important;
+						}
+					}
+					@media only screen and (max-width: 380px) {
+						.header {
+							font-size: 2.6rem !important;
+						}
+					}
+				</style>
+				{% if weekly_ideas %}
+					<div class="content-container">
+						<h1>
+							<b>Recently Created</b>
+						</h1>
+					</div>
+					<div class="idea-container">
+						{% for idea in weekly_ideas %}
+							<div class="card">
+								<!-- Header image -->
+								{% if idea.header_img.file %}
+									<div class="card-img-wrapper">
+										<img src="http://theimpossible.world{{ idea.header_img.file.url }}" alt="{{ idea.header_img.description }}">
+									</div>
+								{% endif %}
+
+								<div class="card-body">
+									<!-- Title -->
+									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+
+									<!-- Short description -->
+									<h6 class="card-subtitle">{{ idea.short_description|truncatechars:150 }}</h6>
+
+									<!-- Content -->
+									<p class="card-text">{{ idea.full_description|truncatechars:300 }}</p>
+
+									<!-- Author -->
+									<p class="author">By {{ idea.author }}</p>
+
+									<!-- Views -->
+									<p class="views">Views {{ idea.viewed_user.count|ntt }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if random_ideas %}
+					<div class="content-container">
+						<h1>
+							<b>Random Picks</b>
+						</h1>
+					</div>
+					<div class="idea-container">
+						{% for idea in random_ideas %}
+							<div class="card">
+								<!-- Header image -->
+								{% if idea.header_img.file %}
+									<div class="card-img-wrapper">
+										<img src="http://theimpossible.world{{ idea.header_img.file.url }}" alt="{{ idea.header_img.description }}">
+									</div>
+								{% endif %}
+
+								<div class="card-body">
+									<!-- Title -->
+									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+
+									<!-- Short description -->
+									<h6 class="card-subtitle">{{ idea.short_description|truncatechars:150 }}</h6>
+
+									<!-- Content -->
+									<p class="card-text">{{ idea.full_description|truncatechars:300 }}</p>
+
+									<!-- Author -->
+									<p class="author">By {{ idea.author }}</p>
+
+									<!-- Views -->
+									<p class="views">Views {{ idea.viewed_user.count|ntt }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<div class="content-container link-container">
+					<h3><a href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}">EXPLORE MORE</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'account_meet_page' page_num=1 username=None %}">CONNECT</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'login_page' %}">MY ACCOUNT</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'account_setting_newsletter_page' %}">EMAIL NOTIFICATION SETTINGS</a></h3>
+				</div>
+				<div class="content-container">
+					<p class="noreply-text">
+						<b>(Do not reply to this email)</b>
+					</p>
+				</div>
+			</div>
+
+			<footer>
+				<table class="table">
+					<tr>
+						<td>
+							<button class="brand-name" onclick="window.location.href='http://theimpossible.world{% url 'home_page' %}'"><b>THE IMPOSSIBLE @ 2020</b></button>
+						</td>
+						<td id="contact-td">
+							<div class="contact">
+								<button onclick="window.location.href='https://www.instagram.com/micha31r/'"><img src="http://theimpossible.world{% static 'support/templated_email/twitter.svg' %}"></button>
+								<button onclick="window.location.href='https://twitter.com/micha31_r'"><img src="http://theimpossible.world{% static 'support/templated_email/instagram.svg' %}"></button>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</footer>
+		</body>
+	{% endinlinecss %}
+{% endblock %}

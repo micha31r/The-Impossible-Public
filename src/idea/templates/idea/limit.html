@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Limit - The Impossible</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Reset CSS -->
+		<link rel="stylesheet" type="text/css" href="{% static 'component/base/reset.css' %}">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<!-- favicon image -->
+	    <link rel="icon" href="{% static 'component/base/favicon.png' %}">
+	</head>
+	<body>
+		<link rel="stylesheet" type="text/css" href="{% static 'idea/limit_page/main.css' %}">
+
+		<div class="wrapper">
+			<div class='row align-items-center h-100'>
+				<div class="center">
+					<h2>Daily Limit Reached!</h2>
+					<h6>You can only create 5 ideas per day</h6>
+					<h6><a href="{% url 'support_question_page' %}">Request for more</a></h6>
+					<br>
+					<a href="javascript:history.back()" style="float: right;"><b>Go back</b></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

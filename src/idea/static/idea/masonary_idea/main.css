@@ -1,0 +1,188 @@
+@keyframes show-card-button {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+		display: block;
+	}
+}
+
+@keyframes hide-card-button {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+		display: none;
+	}
+}
+
+/* https://tobiasahlin.com/blog/masonry-with-css/ */
+.flex-container {
+    display: flex;
+	flex-flow: column wrap;
+	align-content: space-between;
+	/* Must be fixed height for masonary to work */
+	height: 500px;
+	width: 100%;
+}
+
+.no-content-text {
+	width:100%;
+	height:100%; 
+	text-align: center;
+}
+
+.no-content-text h1, .no-content-text a {
+	font-family: 'Arciform', sans-serif;
+	font-size: 5rem;
+	line-height: 5rem;
+	color: var(--color-second);
+	word-break: break-all;
+	margin: 0;
+}
+
+.no-content-text span {
+	color: var(--color-third);
+}
+
+.no-content-text a {
+	font-size: 2rem;
+	line-height: 2rem;
+	transition: color 0.4s;
+}
+
+.no-content-text a:hover {
+	color: var(--color-four);
+	background-color: transparent !important;
+}
+
+.flex-wrapper {
+	position: relative;
+	margin-bottom: 2%;
+	box-sizing: border-box;
+}
+
+.card {
+	background-color: var(--color-first);
+	width: 100%;
+	border: 0;
+	border-color: var(--color-ten);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 20px;
+	/*box-shadow: 0px 10px 15px rgba(0,0,0,0.1);*/
+	overflow: hidden;
+}
+
+.card-img-wrapper {
+	height: 120px;
+	overflow: hidden;
+}
+
+.card-img-wrapper img {
+	filter: grayscale(100%);
+	width: 100%;
+}
+
+.card-title {
+	margin-top: 5px;
+}
+
+.card-title a {
+	color: var(--color-six);
+	transition: color 0.3s;
+	word-break: break-all;
+}
+
+.card-title a:hover {
+	text-decoration: underline;
+	color: var(--color-five);
+}
+
+.card-subtitle {
+	color: var(--color-four);
+}
+
+.card-text {
+	color: var(--color-six);
+	word-break: break-all;
+}
+
+.author, .views {
+	font-size: 0.8rem;
+	color: var(--color-four);
+	margin: 0;
+	width: 100%;
+}
+
+/* ------------ */
+
+/*@media only screen and (min-width: 1700px) {
+	.flex-wrapper {
+		width: 15%;
+	}
+	.flex-wrapper:nth-of-type(6n+1) { order: 1; }
+	.flex-wrapper:nth-of-type(6n+2) { order: 2; }
+	.flex-wrapper:nth-of-type(6n+3) { order: 3; }
+	.flex-wrapper:nth-of-type(6n+4) { order: 4; }
+	.flex-wrapper:nth-of-type(6n+5) { order: 5; }
+	.flex-wrapper:nth-of-type(6n) { order: 6; }
+}
+
+@media only screen and (max-width: 1699px) {
+	.flex-wrapper {
+		width: 19%;
+	}
+	.flex-wrapper:nth-of-type(5n+1) { order: 1; }
+	.flex-wrapper:nth-of-type(5n+2) { order: 2; }
+	.flex-wrapper:nth-of-type(5n+3) { order: 3; }
+	.flex-wrapper:nth-of-type(5n+4) { order: 4; }
+	.flex-wrapper:nth-of-type(5n) { order: 5; }
+}*/
+
+@media only screen and (max-width: 10000px) {
+	.flex-wrapper {
+		width: 23.5%;
+	}
+	.flex-wrapper:nth-of-type(4n+1) { order: 1; }
+	.flex-wrapper:nth-of-type(4n+2) { order: 2; }
+	.flex-wrapper:nth-of-type(4n+3) { order: 3; }
+	.flex-wrapper:nth-of-type(4n) { order: 4; }
+}
+
+@media only screen and (max-width: 1099px) {
+	.flex-wrapper {
+		width: 31.5%;
+	}
+	.flex-wrapper:nth-of-type(3n+1) { order: 1; }
+	.flex-wrapper:nth-of-type(3n+2) { order: 2; }
+	.flex-wrapper:nth-of-type(3n) { order: 3; }
+}
+
+@media only screen and (max-width: 799px) {
+	.flex-wrapper {
+		width: 47.5%;
+		margin-bottom: 3%;
+	}
+	.flex-wrapper:nth-of-type(2n+1) { order: 1; }
+	.flex-wrapper:nth-of-type(2n) { order: 2; }
+}
+
+@media only screen and (max-width: 499px) {
+	.flex-wrapper {
+		width: 100%;
+		margin-bottom: 5%;
+	}
+	.flex-wrapper:nth-of-type(2n) { order: 1; }
+}
+
+/* Force new columns */
+.break {
+	flex-basis: 100%;
+	width: 0;
+	border: none;
+	margin: 0;
+	padding: 0;
+}

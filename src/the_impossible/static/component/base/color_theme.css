@@ -1,0 +1,132 @@
+.theme-light {
+    --color-brand: rgb(230,171,23); /* 237,178,2 */
+    --color-brand-light: rgb(255,226,138);
+    --color-brand-dark: rgb(199,149,2);
+
+    --color-first: #fff;                    /* White */
+    --color-second: #eee;                   /* Light light grey */
+    --color-third: #ddd;                    /* Light grey */
+    --color-four: #aaa;                     /* Medium grey */
+    --color-five: #555;                     /* Dark grey */
+    --color-six: #000;                      /* Black */
+    --color-seven: rgb(0,0,0,0.1);          /* Transparent light black constant */
+    --color-eight: rgb(255,255,255,0.2);    /* Transparent light white constant */
+    --color-nine: rgb(255,255,255,0.2);     /* Transparent light white */
+    --color-ten: rgb(0,0,0,0.1);            /* Transparent light black */
+    --color-eleven: #333;                   /* Dark dark grey */
+    --color-twelve: rgba(238,238,238,0.5);  /* Light light light grey */
+    
+    /* Reversed colors */
+
+    /* Filters and other */
+    --invert-filter: invert(0%);
+    --invert-filter-reverse: invert(100%);
+}
+
+.theme-dark {
+    --color-brand: rgb(237,178,2);
+    --color-brand-light: rgb(255,226,138);
+    --color-brand-dark: rgb(199,149,2);
+
+    --color-first: #000;                    /* Black */
+    --color-second: #333;                   /* Light Black */
+    --color-third: #444;                    /* Dark grey */
+    --color-four: #aaa;                     /* Medium grey */
+    --color-five: #aaa;                     /* Light grey */
+    --color-six: #d9d9d9;                   /* Lighter grey */
+    --color-seven: rgb(0,0,0,0.1);          /* Transparent light black constant */
+    --color-eight: rgb(255,255,255,0.2);    /* Transparent light white constant */
+    --color-nine: rgb(0,0,0,0.2);           /* Transparent light black */
+    --color-ten: rgb(255,255,255,0.2);      /* Transparent light white */
+    --color-eleven: #ccc;                   /* light grey */
+    --color-twelve: rgb(28, 29, 31);        /* Near black */
+
+    /* Reversed colors */
+
+    /* Filters and other */
+    --invert-filter: invert(100%);
+    --invert-filter-reverse: invert(0%);
+}
+
+/* Navbar color change toggle */
+/*https://www.w3schools.com/howto/howto_css_switch.asp*/
+
+.color-theme-toggle-wrapper {
+    border: 0;
+    /* The height of the toggle is 24px, plus 20px of padding (T & B) */
+    height: 44px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.color-theme-toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.color-theme-toggle input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+/* Hover color depends on the current toggle state */
+.color-theme-toggle input:not(:checked) + .slider:hover {
+    background-color: #aaa !important;
+}
+
+.color-theme-toggle input:checked + .slider:hover {
+    background-color: #d6af00 !important;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.color-theme-toggle input:checked + .slider {
+    background-color: #ffd000; 
+}
+
+.color-theme-toggle input:focus + .slider {
+    box-shadow: 0 0 1px #ffd000;
+}
+
+.color-theme-toggle input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+

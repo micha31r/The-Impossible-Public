@@ -1,0 +1,66 @@
+<!-- Do this in production -->
+<!-- For everylink add http://theimpossible.world before url and static -->
+
+{% load static %}
+{% block html %}
+	{% load inlinecss %}
+	{% inlinecss "support/templated_email/question.css" %}
+		<head>
+			<!-- Required meta tags -->
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		</head>
+		<body>
+			<table class="nav">
+				<tr>
+					<td class="logo-td">
+						<img alt="the impossible logo" src="http://theimpossible.world{% static 'component/base/logo_white.svg' %}">
+					</td>
+					<td>
+						<p class="text">
+							<a class="my-account" href="http://theimpossible.world{% url 'login_page' %}"><b>GO TO MY ACCOUNT</b></a>
+						</p>
+					</td>
+				</tr>
+			</table>
+
+			<div class="wrapper">
+				<div class="content-container">
+					<p>The Impossible</p>
+					<h1 class="header">SUPPORT</h1>
+					<h3 class="question_id"><b>You question number is: {{ question_id }}</b></h3>
+					<p class="main-text">
+						Hi <a class="yellow" href="http://theimpossible.world{% url 'account_dashboard_page' username=username content_filter='my' page_num=1 %}"><b>@{{ username }}</b></a>, We have recieved your query. <br>
+						It can take a while for our team to read and answer your question, therefore, please <b>do not</b> resend your question. If we haven't contact you after 5 business days, you can write to us on our <a class="yellow" href="http://theimpossible.world{% url 'support_feedback_page' %}"><b>feedback page</b></a> and quote your question ID. <br>
+				    	<br>
+				    	Regards <br>
+				    	The Impossible Team
+					</p>
+					<p class="noreply-text">
+						<b>(Do not reply to this email)</b>
+					</p>
+				</div>
+				<!-- <div class="menu">
+					<h5>Browse ideas</h5>
+				</div> -->
+			</div>
+
+			<footer>
+				<table class="table">
+					<tr id="footer-append-origin1">
+						<td>
+							<button class="brand-name" onclick="window.location.href='http://theimpossible.world{% url 'home_page' %}'"><span>The Impossible @ 2020</span></button>
+						</td>
+						<td id="contact-td">
+							<div class="contact">
+								<button onclick="window.location.href='https://www.instagram.com/micha31r/'"><img alt="" src="http://theimpossible.world{% static 'support/templated_email/twitter.svg' %}"></button>
+								<button onclick="window.location.href='https://twitter.com/micha31_r'"><img alt="" src="http://theimpossible.world{% static 'support/templated_email/instagram.svg' %}"></button>
+							</div>
+						</td>
+					</tr>
+					<tr id="footer-append-target1"></tr>
+				</table>
+			</footer>
+		</body>
+	{% endinlinecss %}
+{% endblock %}

@@ -1,0 +1,28 @@
+.profile-form {
+	margin: 0;
+}
+
+.profile-form tr, .profile-form td {
+	padding: 0;
+}
+
+.profile-form table {
+	display: block;
+	margin: auto;
+}
+
+.profile-form .td-label {
+	padding-right: 20px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+@media only screen and (max-width: 700px) {
+	.profile-form .td-label {
+		padding: 0;
+		text-align: left;
+	}
+	.td-label p {
+		margin-bottom: 0;
+	}
+}

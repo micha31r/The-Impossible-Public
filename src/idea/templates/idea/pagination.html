@@ -1,0 +1,41 @@
+{% load static %}
+{% load tags %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'idea/pagination/main.css' %}">
+
+<!-- Page selector -->
+<div class="page-link-wrapper">
+	<!-- Previous page link -->
+	<a {% if page_num|add:'-1' > 0 %} href="{% url 'idea_explore_page' week_num=week_num page_num=page_num|add:'-1' %}" {% endif %} class="{% if page_num|add:'-1' > 0 %} change-page {% else %} change-page-unavailable {% endif %}">
+		<svg class="left-arrow" width="27" height="41" viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M26 5.99999L5.99999 26L0.34314 20.3431L20.3431 0.34314L26 5.99999Z"/>
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M21 41L0.999991 21L6.65685 15.3431L26.6568 35.3431L21 41Z"/>
+		</svg>
+	</a>
+
+	<!-- Link omission (...) -->
+	{% if page_num|add:'-3' > 0 %}
+		<p class="word-omission">..</p>
+	{% endif %}
+
+	<!-- All page links -->
+	{% for i in max_page|times %}
+		<!-- Only show a maximum of 5 page links -->
+		{% if i|add:1 < page_num|add:3 and i|add:1 > page_num|add:'-3' %}
+			<a class="{% if i|add:1 == page_num %} current-page-link {% else %} page-link {% endif %}" href="{% url 'idea_explore_page' week_num=week_num page_num=i|add:1 %}"><b>{{ i|add:1 }}</b></a>
+		{% endif %}
+	{% endfor %}
+
+	<!-- Link omission (...) -->
+	{% if page_num|add:3 < max_page|add:1 %}
+		<p class="word-omission">..</p>
+	{% endif %}
+
+	<!-- Next page link -->
+	<a {% if page_num|add:1 <= max_page %} href="{% url 'idea_explore_page' week_num=week_num page_num=page_num|add:1 %}" {% endif %} class="{% if page_num|add:1 <= max_page %} change-page {% else %} change-page-unavailable {% endif %}">
+		<svg class="right-arrow" width="27" height="41" viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M1.00001 5.99999L21 26L26.6569 20.3431L6.65686 0.34314L1.00001 5.99999Z"/>
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00001 41L26 21L20.3432 15.3431L0.343155 35.3431L6.00001 41Z"/>
+		</svg>
+	</a>
+</div>

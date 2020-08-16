@@ -1,0 +1,50 @@
+.page-link-wrapper {
+	padding-top: 20px;
+	padding-left: 20px;
+	width: 100%;
+	height: max-content;
+	text-align: right;
+}
+
+.left-arrow, .right-arrow {
+	height: 0.8rem;
+}
+
+.change-page .left-arrow, .change-page .right-arrow {
+	fill: var(--color-brand);
+}
+
+.change-page-unavailable .left-arrow, .change-page-unavailable .right-arrow  {
+	fill: var(--color-third);
+}
+
+.word-omission {
+	display: inline-block;
+	color: grey;
+}
+
+.page-link, .current-page-link {
+	display: inline-block;
+	border: 0;
+	padding: 0;
+	margin: 5px;
+	color: var(--color-brand);
+	background-color: transparent;
+}
+
+.page-link:hover {
+	background-color: transparent;
+	color: var(--color-brand-dark);
+}
+
+.current-page-link {
+	color: var(--color-six);
+	border-style: solid;
+	border-color: var(--color-six);
+	border-bottom-width: 2px;
+}
+
+.current-page-link:hover {
+	color: var(--color-six);
+	text-decoration: none;
+}

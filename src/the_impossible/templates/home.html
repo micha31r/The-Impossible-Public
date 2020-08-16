@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	<title>The Impossible</title>
+{% endblock %}
+	
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'home_page/main.css' %}">
+
+	<div class="wrapper">
+		<div class='row align-items-center h-100'>
+			<div class="center">
+				<img alt="" class="circles" src="{% static 'home_page/circles.svg' %}">
+				<!-- <img alt="" class="kite" src="{% static 'home_page/kite.svg' %}"> -->
+				<img alt="the impossible logo" class="logo" src="{% static 'component/base/logo.svg' %}">
+				<h2 class="header"><b>Time To Be Inspired. Create, Share And <a href="{% url 'idea_explore_page' week_num=date.week page_num=1  %}" >Explore Fresh Ideas</a>.</b></h2>
+				<p><b>Join us today</b></p>
+				<button class="btn login" onclick="window.location.href='{% url 'login_page' %}'">Log In</button>
+				<button class="btn signup" onclick="window.location.href='{% url 'signup_page' %}'">Sign Up</button>
+			</div>
+		</div>
+	</div>
+{% endblock %}
