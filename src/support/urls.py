@@ -5,7 +5,9 @@ from .views import (
 	question_page,
 )
 
+app_name = 'support'
+
 urlpatterns = [
-	path('feedback', feedback_page, name="support_feedback_page"),
-	path('question', question_page, name="support_question_page"),
+	path('feedback', feedback_page, name="feedback_page"),
+	path('question', question_page, name="question_page"),
 ]

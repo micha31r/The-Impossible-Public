@@ -2,6 +2,6 @@
 
 {% block delete_img %}
 	{% if file %}
-		<button class="btn btn-black-outline delete-btn" onclick="window.location.href='{% url 'userupload_profile_img_delete_page' redirect_name=redirect_name username=user.username content_filter='my' page_num=1 file_pk=file.pk %}';return false;">Delete</button>
+		<button class="btn btn-black-outline delete-btn" onclick="window.location.href='{% url 'userupload:profile_img_delete_page' %}';return false;">Delete</button>
 	{% endif %}
 {% endblock %}

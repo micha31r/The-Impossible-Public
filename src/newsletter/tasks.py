@@ -15,7 +15,9 @@ from the_impossible.utils import *
 def explore_email():
 	date = Date()
 	today = date.now()
-	timestamp = today - datetime.timedelta(days=7)
+
+	timestamp_weekly = today - datetime.timedelta(days=7)
+	timestamp_monthly = today - datetime.timedelta(days=30)
 
 	# Free gmail account can only send 500 per day
 	email_sum = 500
@@ -27,13 +29,14 @@ def explore_email():
 		increase the number of monthly subscribers.
 	"""
 	weekly_subs = Subscriber.objects.filter(
-		last_sent__lt = timestamp,
+		last_sent__lt = timestamp_weekly,
 		frequency = 2
 	).exclude(frequency=1).distinct()[:250] 
+
 	email_sum -= weekly_subs.count()
 	
 	monthly_subs = Subscriber.objects.filter(
-		last_sent__lt = timestamp,
+		last_sent__lt = timestamp_monthly,
 		frequency = 3
 	).exclude(frequency=1).distinct()[:email_sum] 
 
@@ -65,7 +68,7 @@ def explore_email():
 	for sub in subscribers:
 		send_templated_mail(
 			template_name='explore',
-			from_email=settings.EMAIL_HOST_USER,
+			from_email=settings.DEFAULT_FROM_EMAIL,
 			recipient_list=[sub.email],
 			context={
 				'date':date,
@@ -79,4 +82,4 @@ def explore_email():
 		sub.last_sent = today
 		sub.save()
 
-explore_email(repeat=Task.WEEKLY, repeat_until=None)
+explore_email(repeat=Task.DAILY, repeat_until=None)

@@ -71,6 +71,10 @@
 	width: calc(100% - 70px);
 }
 
+.profile-wrapper * {
+	overflow-wrap: break-word;
+}
+
 .profile-wrapper h6, p {
 	color: var(--color-six);
 	margin: 0;
@@ -212,6 +216,10 @@ button[type="submit"] {
 .search-profile-container .target-profile-img-wrapper {
 	width: 100px;
 	height: 100px;
+}
+
+.search-profile-container * {
+	overflow-wrap: break-word;
 }
 
 .search-profile-container h3 {

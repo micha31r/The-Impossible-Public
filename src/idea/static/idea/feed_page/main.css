@@ -111,7 +111,7 @@ nav, footer {
 	border-style: solid;
 	border-color: var(--color-ten);
 	border-top-width: 1px;
-	word-break: break-all;
+	overflow-wrap: break-word;
 	color: var(--color-six);
 }
 
@@ -128,7 +128,7 @@ nav, footer {
 	color: var(--color-six);
 }
 
-.feed-card ul {
+.feed-card ul, ol {
 	color: var(--color-five);
 	/* Default ul style */
 	display: block; 
@@ -140,13 +140,17 @@ nav, footer {
 	padding-left: 40px;
 }
 
+.feed-card ol {
+	list-style-type: decimal;
+}
+
 .feed-card a {
 	color: var(--color-brand);
 }
 
 .feed-card img {
 	width: 100%;
-	filter: grayscale(100%);
+	/*filter: grayscale(100%);*/
 }
 
 .author, .timestamp {

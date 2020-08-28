@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.urls import reverse
 
 from userupload.models import (
 	File,
@@ -31,6 +32,11 @@ DISCOVER_OPTION = (
     (2,"Discoverable"),
 )
 
+USE_TAG_FILTER_OPTION = (
+	(1,"Filter Off"),
+    (2,"Filter On"),
+)
+
 class Notification(models.Model):
 	# If this is too short then it may result in HTML error
 	message = models.CharField(max_length=1000)
@@ -48,7 +54,8 @@ class Verification(models.Model):
     )
 	slug = models.SlugField(max_length=6,blank=True)
 	def save(self, *args, **kwargs):
-		self.slug = slug_generator(self.id,size=6)
+		if not self.slug:
+			self.slug = slug_generator(self.id,size=6)
 		super(Verification, self).save(*args, **kwargs)
 
 class Profile(models.Model):
@@ -70,6 +77,9 @@ class Profile(models.Model):
 	core_feed = models.ManyToManyField("support.CoreFeed",blank=True,related_name="core_feed")
 	subscriber = models.ForeignKey("newsletter.Subscriber",on_delete=models.SET_NULL,blank=True,null=True)
 
+	# Whether to the user's favourite tags as content filter in explore
+	use_tag_filter = models.IntegerField(default=1,choices=USE_TAG_FILTER_OPTION)
+
 	# Social settings
 	like_setting = models.IntegerField(default=3,choices=LIKE_OPTION)
 	comment_setting = models.IntegerField(default=3,choices=COMMENT_OPTION)
@@ -82,6 +92,9 @@ class Profile(models.Model):
 	daily_limit_timestamp = models.DateTimeField(default=timezone.now)
 
 	timestamp = models.DateTimeField(auto_now_add=True) # default=timezone.now
+
+	def get_absolute_url(self):
+		return reverse('usermgmt:account_dashboard_page', args=(self.user.username,"my",1))
 
 	def __str__(self):
 		full_name = "Anonymous"

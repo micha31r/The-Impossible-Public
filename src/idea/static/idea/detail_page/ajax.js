@@ -28,7 +28,7 @@ function comment_ajax(pk) {
                                 }
                                 $("#append-target2").append(
                                     `<div class="comment-wrapper">
-                                    <h6>${comment.fields.full_description}</h6>
+                                    <h6>${comment.fields.content}</h6>
                                     <p class="small">${author}</p>
                                     <a class="small ${delete_link_class}" href="${delete_link}">
                                     <span>Last Edited <span class="time">${last_edit}</span></span></a>`

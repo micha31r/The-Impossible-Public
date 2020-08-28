@@ -25,7 +25,7 @@
 		<script type="text/javascript" src="{% static 'usermgmt/verify_page/count_down.js' %}"></script>
 
 		<script type="text/javascript">
-			var resend_link = "{% url 'send_code_view' username=user.username %}";
+			var resend_link = "{% url 'usermgmt:send_code_view' username=user.username %}";
 		</script>
 		
 		<div class="wrapper">

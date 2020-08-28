@@ -2,6 +2,11 @@
 {% load static %}
 {% load tags %}
 
+{% block meta %}
+	<meta name="description" content="Explore new, creative and innovative ideas from week {{ date.week }} at The Impossible.">
+	<meta name="keywords" content="the impossible explore, cool ideas, innovative ideas, theimpossible, the impossible, theimpossible world, the impossible world, innovative ideas, fresh ideas, idea sharing platform, share ideas, browse ideas, platform to share ideas">
+{% endblock %}
+
 {% block title %}
 	<title>Explore - The Impossible</title>
 	<!-- Change favicon if there are unread notifications -->
@@ -12,7 +17,7 @@
 
 {% block nav_custom %}
 	<li class="nav-item">
-		<a class="nav-link has-label" href="{% url 'idea_create_view' %}">
+		<a class="nav-link has-label" href="{% url 'idea:create_view' %}">
 			<span class="svg-wrapper">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
 			</span>
@@ -24,7 +29,7 @@
   			{% if user.is_authenticated and new_notification %}
   				<span class="badge badge-danger new-notification-count">{% if new_notification < 10 %}{{ new_notification }}{% else %}∞{% endif %}</span>
   			{% endif %}
-    		<a class="nav-link has-label" href="{% url 'account_dashboard_page' username=user.username content_filter='my' page_num=1 %}">
+    		<a class="nav-link has-label" href="{% url 'usermgmt:account_dashboard_page' username=user.username content_filter='my' page_num=1 %}">
     			<span class="svg-wrapper">
     				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
     			</span>
@@ -54,10 +59,10 @@
 
 			<!-- Change Week -->
 			{% if previous_week_num != None %}
-				<button class="btn btn-week btn-yellow-outline" onclick="window.location.href='{% url 'idea_explore_page' week_num=previous_week_num page_num=1 %}'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+				<button class="btn btn-week btn-yellow-outline" onclick="window.location.href='{% url 'idea:explore_page' week_num=previous_week_num page_num=1 %}'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
 			{% endif %}
 			{% if next_week_num != None %}
-				<button class="btn btn-week btn-yellow" onclick="window.location.href='{% url 'idea_explore_page' week_num=next_week_num page_num=1 %}'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-first)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+				<button class="btn btn-week btn-yellow" onclick="window.location.href='{% url 'idea:explore_page' week_num=next_week_num page_num=1 %}'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-first)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
 			{% endif %}
 		</div>
 
@@ -75,7 +80,7 @@
 			<h3>The Impossible's<br>Message</h3>
 			<!-- Change message content below -->
 			<p>Browse, create and share ideas. We are here to boost your creativity during COVID-19. Stay safe and be inspired!<br>If you have any questions, feel free to contact us.</p>
-			<button class="btn" onclick="window.location.href='{% url 'support_question_page' %}'">
+			<button class="btn" onclick="window.location.href='{% url 'support:question_page' %}'">
 				Contact us <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
 			</button>
 		</div>
@@ -85,7 +90,7 @@
 	<div class="wrapper discover-wrapper">
 		<div class="discover-header">
 			<h1>Discover</h1>
-			<h6 class="discover-customise"><a href="{% if user.is_authenticated %}{% url 'account_setting_explore_content_page' %}{% else %}{% url 'login_page' %}{% endif %}">Customise <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width=2 stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-right"><rect x="1" y="5" width="22" height="14" rx="7" ry="7"></rect><circle cx="16" cy="12" r="3"></circle></svg></a></h6>
+			<h6 class="discover-customise"><a href="{% if user.is_authenticated %}{% url 'usermgmt:account_setting_explore_content_page' %}{% else %}{% url 'usermgmt:login_page' %}{% endif %}">Use filter</a></h6>
 		</div>
 		<br>
 		<div class="horizontal-overflow-wrapper">
@@ -93,10 +98,10 @@
 				{% for idea in random_ideas %}
 					<div class="discover-card">
 
-						<a href="{% url 'idea_detail_page' pk=idea.pk %}"><div class="img-border"><img class="header-img" src="{{ idea.header_img.file.url }}" alt="{{ idea.header_img.description }}"></div></a>
+						<a href="{% url 'idea:detail_page' pk=idea.pk %}"><div class="img-border"><img class="header-img" src="{{ idea.header_img.file.url }}" alt="{{ idea.header_img.description }}"></div></a>
 
 						<!-- Title -->
-						<h5 class="card-title"><a href="{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+						<h5 class="card-title"><a href="{% url 'idea:detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
 
 						<!-- Short description -->
 						<h6 class="card-subtitle mb-2">{{ idea.short_description|truncatechars:50 }}</h6>
@@ -115,7 +120,7 @@
 	<div class="wrapper search-wrapper">
 		<h3>Looking for something?</h3>
 		<h5><b>Search it here:</b></h5>
-		<form action="{% url 'idea_search_page' page_num=1 name=None %}">
+		<form action="{% url 'idea:search_page' page_num=1 name=None %}">
 	  		<input placeholder="Idea Name" name="name" required="required">
 	  		<button class="btn btn-yellow-outline" type="submit">
   				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -125,7 +130,7 @@
 
 	<!-- Feed button -->
 	{% if user.is_authenticated %}
-		<button class="btn btn-yellow feed-button" onclick="window.location.href='{% url 'idea_feed_page' %}'">
+		<button class="btn btn-yellow feed-button" onclick="window.location.href='{% url 'idea:feed_page' %}'">
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
 		</button>
 	{% endif %}

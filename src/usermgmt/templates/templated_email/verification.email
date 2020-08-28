@@ -19,7 +19,7 @@
 					</td>
 					<td>
 						<p class="text">
-							<a class="my-account" href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
+							<a class="my-account" href="http://theimpossible.world{% url 'idea:explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
 						</p>
 					</td>
 				</tr>

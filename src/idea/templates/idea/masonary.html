@@ -34,7 +34,7 @@
 					{% endif %}	
 
 					<!-- Title -->
-					<h5 class="card-title"><a href="{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+					<h5 class="card-title"><a href="{% url 'idea:detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
 
 					<!-- Short description -->
 					<h6 class="card-subtitle mb-2">{{ idea.short_description|truncatechars:50 }}</h6>
@@ -61,7 +61,7 @@
 		    <tr>
 		    	<td class="align-middle">
 					<h1><span>No</span>thing t<span>o</span> sh<span>o</span>w</h1>
-					<a href="{% url 'idea_create_view' %}">Click to add ur idea</a>
+					<a href="{% url 'idea:create_view' %}">Click to add ur idea</a>
 				</td>
 			</tr>
 		</table>

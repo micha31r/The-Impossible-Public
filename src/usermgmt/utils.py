@@ -5,6 +5,7 @@ from templated_email import send_templated_mail
 
 from the_impossible.utils import *
 
+@background(schedule=10)
 def welcome_email(username,email,verification_code):
     subject = 'Joined The Impossible'
     message = f"""
@@ -16,17 +17,17 @@ def welcome_email(username,email,verification_code):
         Regards
         The Impossible @ 2020
     """
-    email_from = settings.EMAIL_HOST_USER
+    email_from = settings.DEFAULT_FROM_EMAIL
     recipient_list = [email,]
     try:
         send_mail(subject, message, email_from, recipient_list)
     except: pass
 
-@background(schedule=20)
+@background(schedule=10)
 def verification_email(email,verification_code):
     send_templated_mail(
         template_name='verification',
-        from_email=settings.EMAIL_HOST_USER,
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[email],
         context={
             "date":Date(),

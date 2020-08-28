@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta %}
+<!-- No meta tags -->
+{% endblock %}
+
 {% block title %}
 	<title>{{ idea.name }} - The Impossible</title>
 {% endblock %}
@@ -15,16 +19,13 @@
 	<!-- Resize js -->
 	<script type="text/javascript" src="{% static 'idea/edit_page/resize.js' %}"></script>
 
-	<!-- Delete confirm js -->
-	<script type="text/javascript" src="{% static 'idea/edit_page/delete_confirm.js' %}"></script>
-
 	<div class="wrapper">
 		<form method="post">
 	    	{% csrf_token %}
 
 	    	<!-- Show errors -->
 			{% if error %}
-				<div class="alert alert-black bold" role="alert">
+				<div class="alert alert-yellow bold" role="alert">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
 	                {{ error|escape }}
 	            </div>
@@ -64,8 +65,7 @@
 								<td id="delete-button">
 									<!-- Delete button -->
 									<h5><b>Delete Idea:</b></h5>
-									<p id="hidden" style="display:none;">{{ form.delete }}</p>
-									<button class="btn btn-black-outline bold" id="confirm-button" onclick="click_confirm('hidden','confirm-button'); return false;">Reveal</button>
+									<p>{{ form.delete }}</p>
 								</td>
 							</tr>
 							<tr id="append-target3"></tr>
@@ -84,7 +84,7 @@
 						<!-- Header image -->
 						<div class="file-wrapper">
 							<button class="btn file-button" name="redirect_img" data-toggle="popover" data-trigger="hover" 
-							title="Header image" data-content="Click to change" value="{% if idea.header_img %}{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk=idea.header_img.pk field='header' %}{% else %}{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk='None' field='header' %}{% endif %}">
+							title="Header image" data-content="Click to change" value="{% url 'userupload:idea_header_img_page' idea_pk=idea.pk %}">
 								{% if idea.header_img.file %}
 									<img alt="header image" class="header-img" src="{{ idea.header_img.file.url }}">
 								{% else %}
@@ -102,13 +102,13 @@
 						{% for image in idea.body_img.all %}
 							<div class="file-wrapper">
 								<button class="btn file-button" name="redirect_img" data-toggle="popover" data-trigger="hover" 
-							title="Body image" data-content="Click to change" value="{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk=image.pk field='body' %}"><img alt="body image" src="{{ image.file.url }}"></button>
+							title="Body image" data-content="Click to change" value="{% url 'userupload:idea_body_img_page' idea_pk=idea.pk file_pk=image.pk %}"><img alt="body image" src="{{ image.file.url }}"></button>
 							</div>
 						{% endfor %}
 						<!-- Add body image -->
 						<div class="file-wrapper">
 								<button class="btn file-button file-button-add" name="redirect_img" data-toggle="popover" data-trigger="hover" 
-							title="Body image" data-content="Click to add" value="{% url 'userupload_idea_img_page' idea_pk=idea.pk file_pk='None' field='body' %}">+</button>
+							title="Body image" data-content="Click to add" value="{% url 'userupload:idea_body_img_page' idea_pk=idea.pk file_pk=None %}">+</button>
 						</div>
 						<!-- Show tooltip after hover -->
 						<script type="text/javascript">
@@ -127,6 +127,7 @@
 		<div class="timestamp">
 			<p>Created at <span class="time">{{ idea.timestamp }}</span></p>
 			<p>Last Edited <span class="time">{{ idea.last_edit }}</span></p>
+			<a class="view-idea" href="{% url 'idea:detail_page' pk=idea.pk %}">View Idea</a>
 		</div>
 	</div>
 {% endblock %}

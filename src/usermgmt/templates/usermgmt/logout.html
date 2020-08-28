@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta %}
+<!-- No meta tags -->
+{% endblock %}
+
 {% block title %}
 	<title>Logout - The Impossible</title>
 {% endblock %}
@@ -25,7 +29,7 @@
 				<h4><b>Log out of The Impossible?</b></h4>
 				<p>If you logout, you will have to re-sign into your account in order to access all features of this site.</p>
 				<button class="btn btn-yellow bold" style="display:inline-block;width:45%;float:left;" onclick="window.history.back();">Cancel</button>
-				<button class="btn btn-yellow-outline bold" style="display:inline-block;width:45%;float:right;" onclick="window.location.href='{% url 'logout_view' %}'">Log Out</button>
+				<button class="btn btn-yellow-outline bold" style="display:inline-block;width:45%;float:right;" onclick="window.location.href='{% url 'usermgmt:logout_view' %}'">Log Out</button>
 			</div>
 		</div>
 	</div>

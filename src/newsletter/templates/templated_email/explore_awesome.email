@@ -16,11 +16,11 @@
 			<table class="nav">
 				<tr>
 					<td class="logo-td">
-						<img src="http://theimpossible.world{% static 'component/base/logo_white.svg' %}">
+						<img alt="the impossible logo" src="http://theimpossible.world{% static 'component/base/logo_white.svg' %}">
 					</td>
 					<td>
 						<p class="text">
-							<a class="my-account" href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
+							<a class="my-account" href="http://theimpossible.world{% url 'idea:explore_page' week_num=date.week page_num=1 %}"><b>EXPLORE MORE IDEAS</b></a>
 						</p>
 					</td>
 				</tr>
@@ -35,7 +35,7 @@
 						<h1 class="header">Suggestions</h1>
 						<h3 class="week-num"><b>From week {{ date.week }}</b></h3>
 					</div>
-					<img src="http://theimpossible.world{% static 'newsletter/templated_email/tree.jpg' %}" style="width: 500px; max-width: 100%;">
+					<img src="http://theimpossible.world{% static 'newsletter/templated_email/cover.png' %}" style="width: 500px; max-width: 100%;">
 				</div>
 				<style type="text/css">
 					@media only screen and (max-width: 720px) {
@@ -79,7 +79,7 @@
 
 								<div class="card-body">
 									<!-- Title -->
-									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea:detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
 
 									<!-- Short description -->
 									<h6 class="card-subtitle">{{ idea.short_description|truncatechars:150 }}</h6>
@@ -115,7 +115,7 @@
 
 								<div class="card-body">
 									<!-- Title -->
-									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+									<h5 class="card-title"><a href="http://theimpossible.world{% url 'idea:detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
 
 									<!-- Short description -->
 									<h6 class="card-subtitle">{{ idea.short_description|truncatechars:150 }}</h6>
@@ -134,10 +134,10 @@
 					</div>
 				{% endif %}
 				<div class="content-container link-container">
-					<h3><a href="http://theimpossible.world{% url 'idea_explore_page' week_num=date.week page_num=1 %}">EXPLORE MORE</a></h3>
-					<h3><a href="http://theimpossible.world{% url 'account_meet_page' page_num=1 username=None %}">CONNECT</a></h3>
-					<h3><a href="http://theimpossible.world{% url 'login_page' %}">MY ACCOUNT</a></h3>
-					<h3><a href="http://theimpossible.world{% url 'account_setting_newsletter_page' %}">EMAIL NOTIFICATION SETTINGS</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'idea:explore_page' week_num=date.week page_num=1 %}">EXPLORE MORE</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'usermgmt:account_meet_page' page_num=1 username=None %}">CONNECT</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'usermgmt:login_page' %}">MY ACCOUNT</a></h3>
+					<h3><a href="http://theimpossible.world{% url 'usermgmt:account_setting_newsletter_page' %}">EMAIL NOTIFICATION SETTINGS</a></h3>
 				</div>
 				<div class="content-container">
 					<p class="noreply-text">

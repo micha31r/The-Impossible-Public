@@ -2,6 +2,10 @@
 {% load static %}
 {% load tags %}
 
+{% block meta %}
+<!-- No meta tags -->
+{% endblock %}
+
 {% block title %}
 	<title>Feedback - The Impossible</title>
 {% endblock %}
@@ -13,13 +17,13 @@
 		<div class='row align-items-center h-100'>
 			<div class="center">
 				<div class="close-window-wrapper">
-					<button class="btn close-window" onclick="window.location.href='{% url 'account_dashboard_page' username=user.username content_filter='my' page_num=1 %}'">
+					<button class="btn close-window" onclick="window.location.href='{% url 'usermgmt:account_dashboard_page' username=user.username content_filter='my' page_num=1 %}'">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
 					</button>
 				</div>
 				<h1 class="header"><b>Feedback</b></h1>
 				{% if success %}
-					<div class="alert alert-black">
+					<div class="alert alert-yellow">
 						Success! Feedback is sent
 					</div>
 				{% endif %}

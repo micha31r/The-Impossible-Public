@@ -165,9 +165,14 @@ class ExploreContentForm(forms.ModelForm):
         model = Profile
         fields = [
             "tags",
+            "use_tag_filter"
         ]
         labels={
             "tags":"Tags",
+            "use_tag_filter":"Use tag filter"
+        }
+        widgets = {
+            "use_tag_filter":forms.RadioSelect(),
         }
 
 class NotificationForm(forms.ModelForm):

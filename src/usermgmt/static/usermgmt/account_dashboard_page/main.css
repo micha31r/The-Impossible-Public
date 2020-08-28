@@ -55,20 +55,30 @@ a:hover {
 	margin-bottom: 15px;
 }
 
+.bio-link-wrapper {
+	margin-bottom: 20px;
+}
+
 .bio {
 	color: var(--color-six);
 	margin-bottom: 0;
+	overflow-wrap: break-word;
 }
 
 .website {
 	display: block;
-	margin-bottom: 15px;
 	color: var(--color-brand);
 	font-weight: bold;
+	overflow-wrap: break-word;
 }
 
 .website:hover {
 	color: var(--color-brand-dark); 
+}
+
+.location {
+	max-width: 100%;
+	overflow-wrap: break-word;
 }
 
 .location, .joined-timestamp, .daily-limit, .followers, .following {
@@ -94,11 +104,13 @@ a:hover {
 
 .edit-profile {
 	display: block;
+	max-width: 100%;
 	border-radius: 200px;
 	padding: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-top: 20px;
+	overflow-wrap: break-word;
 }
 
 /* ----------- */

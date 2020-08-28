@@ -1,5 +1,8 @@
 from django.urls import path
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
+
+from .sitemaps import ProfileSitemap
 
 from .views import (
 	signup_page,
@@ -25,7 +28,16 @@ from .setting_views import (
 	account_setting_newsletter_page,
 )
 
+sitemaps = {
+    'profiles': ProfileSitemap
+}
+
+app_name = 'usermgmt'
+
 urlpatterns = [
+	# Site map 
+	path('sitemap.xml', sitemap, {'sitemaps' : sitemaps } , name='sitemap'),
+
 	path('signup', signup_page, name="signup_page"),
 	path('verify/<slug:username>', verify_page, name="verify_page"),
 	path('send-code/<slug:username>', send_code_view, name="send_code_view"),
@@ -39,7 +51,6 @@ urlpatterns = [
 	path('account/meet/<int:page_num>/<slug:username>', account_meet_page, name="account_meet_page"),
 	
 	# Account settings
-
 	path('account/settings/profile', account_setting_profile_page, name="account_setting_profile_page"),
 	path('account/settings/password', account_setting_password_page, name="account_setting_password_page"),
 	path('account/settings/explore-content', account_setting_explore_content_page, name="account_setting_explore_content_page"),
@@ -50,4 +61,4 @@ urlpatterns = [
 
 if settings.DEBUG:
 	# THIS IS FOR TESTING ONLY !!
-	urlpatterns.append(path('email', email_page, name="usermgmt_email_page"))
+	urlpatterns.append(path('email', email_page, name="email_page"))

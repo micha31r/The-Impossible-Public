@@ -77,7 +77,7 @@ def explore_page(request,week_num,page_num):
 
 	# Discover Section
 	# Retrieve all ideas from the past 6 months
-	if fav_tags:
+	if request.user.is_authenticated and profile.use_tag_filter == 2 and fav_tags:
 		ideas = Idea.objects.filter(
 			timestamp__gte = date.now() - datetime.timedelta(days=182),
 			timestamp__lte = date.now() + datetime.timedelta(days=1),
@@ -141,7 +141,7 @@ def detail_page(request,pk):
 		data = form.cleaned_data
 		comment = Comment.objects.create(
 			author = profile,
-			full_description = data.get("full_description")
+			content = data.get("content")
 		)
 		comment.save()
 		idea.comments.add(comment)
@@ -157,7 +157,7 @@ def detail_page(request,pk):
 			elif idea.author.comment_setting == 3:
 				proceed = True
 			if proceed:
-				absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(profile.user.username,'my',1)))
+				absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(profile.user.username,'my',1)))
 				message = f"<a href='{absolute_url}'>@{profile.user.username}</a> has commented on your post <a href='{request.path}'>\"{idea.name}\"</a>"
 				msg = Notification.objects.create(message=message,message_status=1)
 				msg.save()
@@ -165,13 +165,13 @@ def detail_page(request,pk):
 				idea.author.save()
 
 		# Search description for @ users
-		usernames = at_filter(comment.full_description)
+		usernames = at_filter(comment.content)
 		for username in usernames:
 			user = User.objects.filter(username=username).first()
 			if user:
 				profile = Profile.objects.filter(user=user).first()
 				# Send the mentioned user a notification
-				absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(request.user.username,'my',1)))
+				absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(request.user.username,'my',1)))
 				message = f"<a href='{absolute_url}'>@{request.user.username}</a> mentioned you in a comment in <a href='{request.path}'>\"{idea.name}\"</a>"
 				msg = Notification.objects.create(message=message,message_status=2)
 				msg.save()
@@ -185,6 +185,9 @@ def detail_page(request,pk):
 				idea.author.notification.add(msg)
 				idea.author.save()
 
+		# Clear form
+		ctx["form"] = CommentForm()
+
 	template_file = "idea/detail.html"
 	return render(request,template_file,ctx)
 
@@ -195,7 +198,7 @@ def create_view(request):
 	
 	if profile.daily_limit_timestamp.strftime("%Y-%m-%d") == str(date.now()):
 		if profile.daily_limit <= 0:
-			return redirect("idea_limit_page")
+			return redirect("idea:limit_page")
 	else:
 		profile.daily_limit = 5
 		profile.daily_limit_timestamp = date.now()
@@ -210,7 +213,7 @@ def create_view(request):
 	obj.save()
 	profile.daily_limit -= 1
 	profile.save()
-	return redirect("idea_edit_page",pk=obj.id)
+	return redirect("idea:edit_page",pk=obj.id)
 
 # Daily limit reached
 def limit_page(request):
@@ -244,14 +247,13 @@ def edit_page(request,pk):
 		if form.is_valid():
 			data = form.cleaned_data
 			if data.get("delete") == 2:
-				idea.comments.all().delete()
 				idea.delete()
-				return redirect("idea_explore_page",date.week(),1)
+				return redirect("idea:explore_page",date.week(),1)
 
 			idea.name = escape_html(data.get("name"))
 			idea.short_description = data.get("short_description")
 
-			idea_absolute_url = request.build_absolute_uri(reverse('idea_detail_page', args=(pk,)))
+			idea_absolute_url = request.build_absolute_uri(reverse('idea:detail_page', args=(pk,)))
 
 			# Search description for @ users
 			usernames = set(at_filter(data.get("full_description"))) - set(usernames_before_edit)
@@ -266,7 +268,7 @@ def edit_page(request,pk):
 					if proceed:
 						profile = Profile.objects.filter(user=user).first()
 						# Send the mentioned user a notification
-						user_absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(request.user.username,'my',1)))
+						user_absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(request.user.username,'my',1)))
 						message = f"<a href='{user_absolute_url}'>@{request.user.username}</a> mentioned you in <a href='{idea_absolute_url}'>\"{idea.name}\"</a>"
 						msg = Notification.objects.create(message=message,message_status=2)
 						msg.save()
@@ -274,7 +276,7 @@ def edit_page(request,pk):
 						profile.notification.add(msg)
 					else:
 						# Tell the current user that certain uses can't be mentioned
-						user_absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(username,'my',1)))
+						user_absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(username,'my',1)))
 						message = f"<a href='{user_absolute_url}'>@{username}</a> is not mentioned due to <a href='{idea_absolute_url}'>\"{idea.name}\"</a>s publish setting"
 						msg = Notification.objects.create(message=message,message_status=1)
 						msg.save()
@@ -298,7 +300,7 @@ def edit_page(request,pk):
 			# Notify followers if publish setting is set to followers-only or public
 			if not idea.notified and (idea.publish_status == 2 or idea.publish_status == 3):
 				idea.notified = True
-				user_absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(request.user.username,'my',1)))
+				user_absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(request.user.username,'my',1)))
 				message = f"<a href='{user_absolute_url}'>@{request.user.username}</a> has created a new post <a href='{idea_absolute_url}'>\"{idea.name}\"</a>"
 				msg = Notification.objects.create(message=message,message_status=1)
 				msg.save()
@@ -322,7 +324,7 @@ def edit_page(request,pk):
 				return redirect(request.POST.get("redirect_img"))
 			else:
 				# Refresh page
-				return redirect("idea_edit_page", pk=idea.id)
+				return redirect("idea:edit_page", pk=idea.id)
 	else:
 		return redirect("access_error_page")
 	template_file = "idea/edit.html"
@@ -381,14 +383,14 @@ def like_view(request):
 					elif idea.author.like_setting == 3:
 						proceed = True
 					if proceed:
-						user_absolute_url = request.build_absolute_uri(reverse('account_dashboard_page', args=(user.username,'my',1)))
-						idea_absolute_url = request.build_absolute_uri(reverse('idea_detail_page', args=(pk,)))
+						user_absolute_url = request.build_absolute_uri(reverse('usermgmt:account_dashboard_page', args=(user.username,'my',1)))
+						idea_absolute_url = request.build_absolute_uri(reverse('idea:detail_page', args=(pk,)))
 						message = f"<a href='{user_absolute_url}'>@{user.username}</a> has liked your post <a href='{idea_absolute_url}'>\"{idea.name}\"</a>"
 						msg = Notification.objects.create(message=message,message_status=1)
 						msg.save()
 						idea.author.notification.add(msg)
 						idea.author.save()
-				data["action"] = "liked"			
+				data["action"] = "liked"
 		else:
 			raise CustomError("AjaxInvalid")
 	except:
@@ -426,7 +428,7 @@ def comment_delete_view(request,comment_pk,idea_pk):
 	comment = get_object_or_404(Comment, pk=comment_pk)
 	if comment.author.user == request.user:
 		comment.delete()
-	return redirect("idea_detail_page", pk=idea_pk)
+	return redirect("idea:detail_page", pk=idea_pk)
 
 @login_required
 def comment_get_view(request):

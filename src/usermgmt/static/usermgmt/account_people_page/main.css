@@ -135,10 +135,12 @@ h3[name="current"] {
 .profile-content-wrapper h6, p {
 	color: var(--color-six);
 	margin: 0;
+	overflow-wrap: break-word;
 }
 
 .profile-content-wrapper a {
 	color: var(--color-brand-dark);
+	word-break: break-all;
 }
 
 .profile-content-wrapper a:hover {

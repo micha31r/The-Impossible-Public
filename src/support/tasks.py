@@ -6,7 +6,7 @@ from templated_email import send_templated_mail
 def support_email(email,username,question_id):
     send_templated_mail(
         template_name='question',
-        from_email=settings.EMAIL_HOST_USER,
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[email],
         context={
             'username':username,

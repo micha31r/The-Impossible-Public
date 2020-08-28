@@ -2,6 +2,11 @@
 {% load static %}
 {% load tags %}
 
+{% block meta %}
+	<meta name="description" content="{{ idea.full_description }}">
+	<meta name="keywords" content="{{ idea.name }}">
+{% endblock %}
+
 {% block title %}
 	<title>{{ idea.name }} - The Impossible</title>
 {% endblock %}
@@ -13,7 +18,10 @@
 	<!-- Resize JS -->
 	<script type="text/javascript" src="{% static 'idea/detail_page/resize.js' %}"></script>
 
-	<!-- Ajax JS -->
+	<!-- Ajax for liking and staring idea -->
+	<script type="text/javascript" src="{% static 'idea/card_action/ajax.js' %}"></script>
+
+	<!-- Ajax for posting comments -->
 	<script type="text/javascript" src="{% static 'idea/detail_page/ajax.js' %}"></script>
 
 	<div class="wrapper">
@@ -22,8 +30,29 @@
 			<div class="idea-content">
 				<h2>{{ idea.name }}</h2>
 				<h5>{{ idea.short_description }}</h5>
-				<p>{{ idea.full_description }}</p>
+				<p>{{ idea.full_description|linebreaks }}</p>
+
 				<div id="append-target1"></div>
+
+				<!-- Views, likes and stars -->
+				<div class="status-wrapper">
+					<p class="view-count">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-six)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+						<span>{{ idea.viewed_user.count|ntt }}</span>
+					</p>
+
+					<!-- Like button -->
+					<button class="btn btn-like" id="card-like-{{ idea.pk }}" onclick="{% if user.is_authenticated %}like_idea_ajax('{{ idea.pk }}'); {% else %} window.location.href='{% url 'usermgmt:login_page' %}' {% endif %}">
+						<svg id="like-svg-{{idea.pk}}" name="{% if profile in idea.liked_user.all %}liked{% endif %}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(252,52,104)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+						<span>{{ idea.liked_user.count|ntt }}</span>
+					</button>
+
+					<!-- Star button -->
+					<button class="btn" id="card-bookmark-{{ idea.pk }}" onclick="{% if user.is_authenticated %}star_idea_ajax('{{ idea.pk }}'); {% else %} window.location.href='{% url 'usermgmt:login_page' %}' {% endif %}">
+						<svg id="star-svg-{{idea.pk}}" name="{% if profile in idea.starred_user.all %}starred{% endif %}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(240,165,0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+					</button>
+				</div>
+				
 				{% if idea.tags %}
 					<div class="idea-tag-container">
 						{% for tag in idea.tags.all %}
@@ -34,7 +63,7 @@
 					</div>
 				{% endif %}
 				{% if user == idea.author.user %}
-					<button class="btn btn-yellow-outline bold edit-btn" onclick="window.location.href='{% url 'idea_edit_page' pk=idea.id %}'">Edit Idea</button>
+					<button class="btn btn-yellow-outline bold edit-btn" onclick="window.location.href='{% url 'idea:edit_page' pk=idea.id %}'">Edit Idea</button>
 				{% endif %}
 			</div>
 
@@ -44,15 +73,15 @@
 					<tr>
 						<td>
 							<div class="author-profile-img-wrapper">
-								<a href="{% url 'account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{% if idea.author.profile_img %}<img alt="profile image" class="author-profile-img" src="{{ idea.author.profile_img.file.url }}">{% endif %}</a>
+								<a href="{% url 'usermgmt:account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{% if idea.author.profile_img %}<img alt="profile image" class="author-profile-img" src="{{ idea.author.profile_img.file.url }}">{% endif %}</a>
 							</div>
 						</td>
 						<td>
 							<div class="info">
 								<p>Written By</p>
 								<h5>
-									<a href="{% url 'account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{{ idea.author }}</a><!-- Follow button -->
-									<a class="follow-btn" href="{% if user.is_authenticated %}{% url 'account_follow_view' username=idea.author.user.username %}{% else %}{% url 'login_page' %}{% endif %}">{% if idea.author.user in profile.following.all %}Unfollow{% else %}Follow{% endif%}</a>
+									<a href="{% url 'usermgmt:account_dashboard_page' username=idea.author.user.username content_filter='my' page_num=1 %}">{{ idea.author }}</a><!-- Follow button -->
+									<a class="follow-btn" href="{% if user.is_authenticated %}{% url 'usermgmt:account_follow_view' username=idea.author.user.username %}{% else %}{% url 'usermgmt:login_page' %}{% endif %}">{% if idea.author.user in profile.following.all %}Unfollow{% else %}Follow{% endif%}</a>
 								</h5>
 								<h6>{% if idea.author.bio %}{{ idea.author.bio|truncatechars:60 }}{% else %}(No Bio..){% endif %}</h6>
 							</div>
@@ -68,7 +97,7 @@
 
 				<!-- Show errors -->
 				{% if error %}
-					<div class="alert alert-black bold" role="alert">
+					<div class="alert alert-yellow bold" role="alert">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
 		                {{ error|escape }}
 		            </div>
@@ -76,7 +105,7 @@
 
 				{% include 'form_error.html' %}
 
-				{{ form.full_description }}
+				{{ form.content }}
 					
 				<button class="btn btn-dark btn-black bold submit" type="submit">Post Comment</button>
 			</form>
@@ -85,9 +114,9 @@
 				<span id="append-target2">
 					{% for comment in comments %}
 						<div class="comment-wrapper">
-							<h6>{{ comment.full_description }}</h6>
+							<h6>{{ comment.content|linebreaks }}</h6>
 							<p class="small">{{ comment.author }}</p>
-							<a class="small {% if comment.author.user == user %} delete-link {% endif %}" {% if comment.author.user == user %} href="{% url 'idea_comment_delete_view' comment_pk=comment.pk idea_pk=idea.pk %}" {% endif %}><span>Last Edited <span class="time">{{ comment.last_edit }}</span></span></a>
+							<a class="small {% if comment.author.user == user %} delete-link {% endif %}" {% if comment.author.user == user %} href="{% url 'idea:comment_delete_view' comment_pk=comment.pk idea_pk=idea.pk %}" {% endif %}><span>Last Edited <span class="time">{{ comment.last_edit }}</span></span></a>
 						</div>
 					{% endfor %}
 				<span>

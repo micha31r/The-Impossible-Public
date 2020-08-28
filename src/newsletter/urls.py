@@ -7,11 +7,13 @@ from .views import (
 	email_page,
 )
 
+app_name = 'newsletter'
+
 urlpatterns = [
-	path('join/', join_view, name="newsletter_join_view"),
-	path('unenroll/<slug:slug>', unenroll_page, name="newsletter_unenroll_page"),
+	path('join/', join_view, name="join_view"),
+	path('unenroll/<slug:slug>', unenroll_page, name="unenroll_page"),
 ] 
 
 if settings.DEBUG:
 	# THIS IS FOR TESTING ONLY !!
-	urlpatterns.append(path('email', email_page, name="newsletter_email_page"))
+	urlpatterns.append(path('email', email_page, name="email_page"))

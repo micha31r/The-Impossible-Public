@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.urls import reverse
 
 from usermgmt.models import (
 	Profile,
@@ -33,14 +34,14 @@ class Comment(models.Model):
 	)
 
     # Content
-	full_description = models.TextField(max_length=280,blank=False,unique=False)
+	content = models.TextField(max_length=280,blank=False,unique=False)
 	
 	# Timestamp
 	timestamp = models.DateTimeField(auto_now_add=True) # default=timezone.now
 	last_edit = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
-		return self.full_description[:50] + '...' 
+		return self.content[:50] + '...' 
 
 class Idea(models.Model):
 
@@ -60,9 +61,9 @@ class Idea(models.Model):
 	header_img = models.ForeignKey(File,on_delete=models.SET_NULL,blank=True,null=True)
 	body_img = models.ManyToManyField(File,related_name="body_image",blank=True)
 
-	name = models.CharField(max_length=70,blank=False,unique=False)
-	short_description = models.TextField(max_length=150,blank=False,unique=False)
-	full_description = models.TextField(max_length=1000,blank=False,unique=False)
+	name = models.CharField(max_length=100,blank=False,unique=False)
+	short_description = models.TextField(max_length=200,blank=False,unique=False)
+	full_description = models.TextField(max_length=3000,blank=False,unique=False)
 	
 	# Likes and views
 	viewed_user = models.ManyToManyField(Profile,related_name="viewed",blank=True)
@@ -78,6 +79,18 @@ class Idea(models.Model):
 	# Timestamp
 	timestamp = models.DateTimeField(auto_now_add=True) # default=timezone.now
 	last_edit = models.DateTimeField(auto_now=True)
+
+	def get_absolute_url(self):
+		return reverse('idea:detail_page', args=(self.pk,))
+
+	def delete(self, *args, **kwargs):
+		# Delete linked objects
+		self.comments.all().delete()
+		self.body_img.all().delete()
+		if self.header_img:
+			self.header_img.delete()
+
+		super(Idea,self).delete(*args,**kwargs)
 
 	def __str__(self):
 		return self.name

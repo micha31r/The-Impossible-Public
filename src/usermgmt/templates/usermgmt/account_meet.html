@@ -2,6 +2,11 @@
 {% load static %}
 {% load tags %}
 
+{% block meta %}
+	<meta name="description" content="Search for users on The Impossible">
+	<meta name="keywords" content="{{ idea.name }}, {{ idea.name }} the impossible">
+{% endblock %}
+
 {% block title %}
 	<title>Connect - The Impossible</title>
 {% endblock %}
@@ -11,7 +16,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 	<li class="nav-item">
-		<a class="nav-link has-label" href="{% url 'idea_explore_page' week_num=date.week page_num=1 %}">
+		<a class="nav-link has-label" href="{% url 'idea:explore_page' week_num=date.week page_num=1 %}">
 			<span class="svg-wrapper">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
 			</span>
@@ -19,7 +24,7 @@
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link has-label" href="{% url 'account_dashboard_page' username=user.username content_filter='my' page_num=1 %}">
+		<a class="nav-link has-label" href="{% url 'usermgmt:account_dashboard_page' username=user.username content_filter='my' page_num=1 %}">
 			<span class="svg-wrapper">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 			</span>
@@ -34,15 +39,15 @@
 	        	</span>
 	       	</button>
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-	        	<a class="dropdown-item" href="{% url 'support_feedback_page' %}">
+	        	<a class="dropdown-item" href="{% url 'support:feedback_page' %}">
 	        		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
 	        		Give feedback
 	        	</a>
-	        	<a class="dropdown-item" href="{% url 'account_notification_page' page_num='1' %}">
+	        	<a class="dropdown-item" href="{% url 'usermgmt:account_notification_page' page_num='1' %}">
 	        		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
 	        		Notifications
 	        	</a>
-				<a class="dropdown-item" href="{% url 'account_people_page' username=user.username follower_page_num=1 following_page_num=1 %}">
+				<a class="dropdown-item" href="{% url 'usermgmt:account_people_page' username=user.username follower_page_num=1 following_page_num=1 %}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
 					Followers and following
 				</a>
@@ -55,11 +60,11 @@
 					</label>
 				</div>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{% url 'account_setting_profile_page' %}">
+				<a class="dropdown-item" href="{% url 'usermgmt:account_setting_profile_page' %}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
 					Settings and Privacy
 				</a>
-				<a class="dropdown-item" href="{% url 'support_question_page' %}">
+				<a class="dropdown-item" href="{% url 'support:question_page' %}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
 					Help and support
 				</a>
@@ -87,7 +92,7 @@
 						</div>
 						<div class="profile-content-wrapper">
 							<p>{{ target_profile.user.get_full_name }}</p>
-							<a href="{% url 'account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
+							<a href="{% url 'usermgmt:account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
 						</div>
 					</div>
 				{% endfor %}
@@ -101,7 +106,7 @@
 						</div>
 						<div class="profile-content-wrapper">
 							<p>{{ target_profile.user.get_full_name }}</p>
-							<a href="{% url 'account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
+							<a href="{% url 'usermgmt:account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
 						</div>
 					</div>
 				{% endfor %}
@@ -115,19 +120,19 @@
 						</div>
 						<div class="profile-content-wrapper">
 							<p>{{ target_profile.user.get_full_name }}</p>
-							<a href="{% url 'account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
+							<a href="{% url 'usermgmt:account_dashboard_page' username=target_profile.user.username content_filter='my' page_num=1 %}">@{{ target_profile.user.username }}</a>
 						</div>
 					</div>
 				{% endfor %}
 			</div>
 		</div>
 		<div class="right">
-			<h1 class="right-header"><a href="{% url 'account_meet_page' username=None page_num=1 %}"><b>Search User</b></a></h1>
-			<form action="{% url 'account_meet_page' username=None page_num=1 %}">
+			<h1 class="right-header"><a href="{% url 'usermgmt:account_meet_page' username=None page_num=1 %}"><b>Search User</b></a></h1>
+			<form action="{% url 'usermgmt:account_meet_page' username=None page_num=1 %}">
 
 				<!-- Show error -->
 				{% if error %}
-					<div class="alert alert-black" role="alert">
+					<div class="alert alert-yellow" role="alert">
 				  		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
 				  		{{ error|escape }}
 					</div>
@@ -168,7 +173,7 @@
 										{% endif %}	
 
 										<!-- Title -->
-										<h5 class="card-title"><a href="{% url 'idea_detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
+										<h5 class="card-title"><a href="{% url 'idea:detail_page' pk=idea.pk %}">{{ idea.name }}</a></h5>
 
 										<!-- Short description -->
 										<h6 class="card-subtitle mb-2">{{ idea.short_description|truncatechars:50 }}</h6>
@@ -185,7 +190,7 @@
 								</div>
 							{% endfor %}
 							{% if more_ideas %}
-								<a class="more-content" href="{% url 'account_dashboard_page' username=search_profile.user.username content_filter='my' page_num=1 %}">...</a>
+								<a class="more-content" href="{% url 'usermgmt:account_dashboard_page' username=search_profile.user.username content_filter='my' page_num=1 %}">...</a>
 							{% endif %}
 						</div>
 					{% endif %}
@@ -195,7 +200,7 @@
 						</div>
 						<div class="profile-content-wrapper">
 							<h3><b>{{ search_profile.user.get_full_name }}</b></h3>
-							<h6><a href="{% url 'account_dashboard_page' username=search_profile.user.username content_filter='my' page_num=1 %}">@{{ search_profile.user.username }}</a></h6>
+							<h6><a href="{% url 'usermgmt:account_dashboard_page' username=search_profile.user.username content_filter='my' page_num=1 %}">@{{ search_profile.user.username }}</a></h6>
 							{% if search_profile.bio %}
 								<p>{{ search_profile.bio }}</p>
 							{% endif %}
@@ -214,7 +219,7 @@
 							{% endif %}
 							<p>Joined: <b>{{ search_profile.timestamp }}</b></p>
 							<!-- Follow button -->
-							<button class="btn btn-yellow bold follow-btn" onclick="window.location.href='{% if user.is_authenticated %}{% url 'account_follow_view' username=search_profile.user.username %}{% else %}{% url 'login_page' %}{% endif %}'">{% if search_profile.user in profile.following.all %}Unfollow{% else %}Follow{% endif %}</button>
+							<button class="btn btn-yellow bold follow-btn" onclick="window.location.href='{% if user.is_authenticated %}{% url 'usermgmt:account_follow_view' username=search_profile.user.username %}{% else %}{% url 'usermgmt:login_page' %}{% endif %}'">{% if search_profile.user in profile.following.all %}Unfollow{% else %}Follow{% endif %}</button>
 						</div>
 					</div>
 				{% elif search_results %}
@@ -232,16 +237,16 @@
 								<tr>
 									<td>
 										<div class="result-profile-img-wrapper">
-											<a href="{% url 'account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">{% if result.profile_img %}<img alt="profile image" class="result-profile-img" src="{{ result.profile_img.file.url }}">{% endif %}</a>
+											<a href="{% url 'usermgmt:account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">{% if result.profile_img %}<img alt="profile image" class="result-profile-img" src="{{ result.profile_img.file.url }}">{% endif %}</a>
 										</div>
 									</td>
 									<td>
 										<div class="info">
 											<h5>
-												<a href="{% url 'account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">{{ result }}</a><!-- Follow button -->
-												<a class="follow-btn" href="{% if user.is_authenticated %}{% url 'account_follow_view' username=result.user.username %}{% else %}{% url 'login_page' %}{% endif %}">{% if result.user in profile.following.all %}Unfollow{% else %}Follow{% endif%}</a>
+												<a href="{% url 'usermgmt:account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">{{ result }}</a><!-- Follow button -->
+												<a class="follow-btn" href="{% if user.is_authenticated %}{% url 'usermgmt:account_follow_view' username=result.user.username %}{% else %}{% url 'usermgmt:login_page' %}{% endif %}">{% if result.user in profile.following.all %}Unfollow{% else %}Follow{% endif%}</a>
 											</h5>
-											<a class="username" href="{% url 'account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">@{{ result.user.username }}</a>
+											<a class="username" href="{% url 'usermgmt:account_dashboard_page' username=result.user.username content_filter='my' page_num=1 %}">@{{ result.user.username }}</a>
 											<h6>{% if result.bio %}{{ result.bio }}{% else %}(No Bio..){% endif %}</h6>
 											<p class="{% if result.location %}location{% endif %}">{% if result.location %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg> {{ result.location }}{% else %}(No location..){% endif %}</p>
 										</div>
@@ -254,7 +259,7 @@
 					<!-- Page selector -->
 					<div class="page-link-wrapper">
 						<!-- Previous page link -->
-						<a {% if page_num|add:'-1' > 0 %} href="{% url 'account_meet_page' username=username page_num=page_num|add:'-1' %}" {% endif %} class="{% if page_num|add:'-1' > 0 %} change-page {% else %} change-page-unavailable {% endif %}">
+						<a {% if page_num|add:'-1' > 0 %} href="{% url 'usermgmt:account_meet_page' username=username page_num=page_num|add:'-1' %}" {% endif %} class="{% if page_num|add:'-1' > 0 %} change-page {% else %} change-page-unavailable {% endif %}">
 							<svg class="left-arrow" width="27" height="41" viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M26 5.99999L5.99999 26L0.34314 20.3431L20.3431 0.34314L26 5.99999Z"/>
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M21 41L0.999991 21L6.65685 15.3431L26.6568 35.3431L21 41Z"/>
@@ -270,7 +275,7 @@
 						{% for i in max_page|times %}
 							<!-- Only show a maximum of 5 page links -->
 							{% if i|add:1 < page_num|add:3 and i|add:1 > page_num|add:'-3' %}
-								<a class="{% if i|add:1 == page_num %} current-page-link {% else %} page-link {% endif %}" href="{% url 'account_meet_page' username=username page_num=i|add:1 %}"><b>{{ i|add:1 }}</b></a>
+								<a class="{% if i|add:1 == page_num %} current-page-link {% else %} page-link {% endif %}" href="{% url 'usermgmt:account_meet_page' username=username page_num=i|add:1 %}"><b>{{ i|add:1 }}</b></a>
 							{% endif %}
 						{% endfor %}
 
@@ -280,7 +285,7 @@
 						{% endif %}
 
 						<!-- Next page link -->
-						<a {% if page_num|add:1 <= max_page %} href="{% url 'account_meet_page' username=username page_num=page_num|add:1 %}" {% endif %} class="{% if page_num|add:1 <= max_page %} change-page {% else %} change-page-unavailable {% endif %}">
+						<a {% if page_num|add:1 <= max_page %} href="{% url 'usermgmt:account_meet_page' username=username page_num=page_num|add:1 %}" {% endif %} class="{% if page_num|add:1 <= max_page %} change-page {% else %} change-page-unavailable {% endif %}">
 							<svg class="right-arrow" width="27" height="41" viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M1.00001 5.99999L21 26L26.6569 20.3431L6.65686 0.34314L1.00001 5.99999Z"/>
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00001 41L26 21L20.3432 15.3431L0.343155 35.3431L6.00001 41Z"/>

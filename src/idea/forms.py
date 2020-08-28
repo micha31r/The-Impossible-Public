@@ -25,9 +25,9 @@ class IdeaForm(forms.ModelForm):
             "publish_status",
         ]
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Title (Max 80)'}),
-            'short_description': forms.Textarea(attrs={'placeholder': 'Description (Max 150)'}),
-            'full_description': forms.Textarea(attrs={'placeholder': 'Content (Max 1000), use @username to mention other users'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Title (Max 100)'}),
+            'short_description': forms.Textarea(attrs={'placeholder': 'Description (Max 200)'}),
+            'full_description': forms.Textarea(attrs={'placeholder': 'Content (Max 3000), use @username to mention other users'}),
         }
         labels={
             "name":"",
@@ -42,11 +42,11 @@ class CommentForm(forms.ModelForm):
         model = Comment
         # Don't use "__all__", in this case the form won't validate
         fields = [
-            "full_description",
+            "content",
         ]
         widgets = {
-            'full_description': forms.Textarea(attrs={'placeholder': 'Content (Max 500), use @username to mention other users'}),
+            'content': forms.Textarea(attrs={'placeholder': 'Content (Max 500), use @username to mention other users'}),
         }
         labels={
-            "full_description":"",
+            "content":"",
         }

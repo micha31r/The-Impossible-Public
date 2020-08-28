@@ -173,12 +173,6 @@ select[name="publish_status"], select[name="delete"] {
 	padding-top: 20px;
 }
 
-/* Delete confirm button */
-#confirm-button {
-	color: rgb(252,52,104);
-	border-radius: 10px;
-}
-
 select[name="delete"] {
 	background-color: rgb(252,52,104);
 	color: #fff;
@@ -270,5 +264,13 @@ select[name="delete"] {
 
 .timestamp .time {
 	color: var(--color-four);
+}
+
+.view-idea {
+	color: var(--color-brand);
+}
+
+.view-idea:hover {
+	color: var(--color-brand-dark);
 }
 

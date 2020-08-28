@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="{% static 'usermgmt/notification/resize.js' %}"></script>
 
 	<h2>
-		<a href="{% if target_profile.user == user %}{% url 'account_notification_page' page_num=1 %}{% endif %}">Notifications</a> 
+		<a href="{% if target_profile.user == user %}{% url 'usermgmt:account_notification_page' page_num=1 %}{% endif %}">Notifications</a> 
 		{% if user.is_authenticated and new_notification %}
 			<span class="badge badge-danger new-notification-count">{% if new_notification < 10 %}{{ new_notification }}{% else %}∞{% endif %}</span>
 		{% endif %}

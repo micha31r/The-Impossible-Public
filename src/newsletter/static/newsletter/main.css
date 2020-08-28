@@ -44,6 +44,12 @@
 	animation-duration: 1s;
 }
 
+/* This alert is always black */
+.alert-black-outline {
+	color: #000;
+	border-color: #000;
+}
+
 .subscribe-wrapper input {
 	border-radius: 500px;
 	border: 0;
